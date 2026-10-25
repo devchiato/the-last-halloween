@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -12,8 +11,7 @@
 body {
   margin: 0;
   background: #111;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   color: white;
 }
 
@@ -256,20 +254,72 @@ body {
   cursor: pointer;
 }
 
+/* HOME SCREEN DAN WIDGET */
 .home {
-  padding: 65px 20px 120px;
-  background: linear-gradient(#0002, #0004);
+  padding: 30px 20px 120px;
+  background: linear-gradient(#0001,#0002);
 }
 
-.day {
-  font-size: 13px;
-  margin-bottom: 25px;
+.home-widgets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 25px 0 28px;
 }
 
+.weather-widget, .clock-widget {
+  min-height: 145px;
+  border-radius: 23px;
+  padding: 15px 13px;
+  background: rgba(10,45,105,.62);
+  border: 1px solid #ffffff38;
+  box-shadow: inset 0 1px 1px #ffffff38;
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+}
+
+.widget-city { font-size: 13px; }
+
+.widget-temp {
+  font-size: 34px;
+  font-weight: 300;
+  white-space: nowrap;
+  letter-spacing: -1px;
+}
+
+.widget-temp span { font-size: 20px; }
+
+.widget-condition, .widget-range {
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.widget-range { opacity: .85; }
+
+.clock-widget {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.widget-time {
+  font-size: 30px;
+  font-weight: 650;
+  letter-spacing: -1px;
+}
+
+.widget-day {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 9px;
+}
+
+/* GRID APLIKASI */
 .apps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 25px 8px;
+  gap: 19px 8px;
 }
 
 .app {
@@ -283,14 +333,55 @@ body {
   cursor: pointer;
 }
 
+/* IKON STYLE IOS */
 .icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 13px;
+  width: 64px;
+  height: 64px;
+  border-radius: 17px;
   display: grid;
   place-items: center;
-  font-size: 28px;
-  box-shadow: 0 2px 5px #0003;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 3px 7px #0003, inset 0 1px 1px #ffffff70;
+  background: #f7f7fa;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.icon.messages, .icon.phone-icon {
+  background: linear-gradient(155deg,#65ed73,#08b928 70%,#079d25);
+}
+
+.icon.notes {
+  background: linear-gradient(#ffd84b 0 27%,#fff 27%);
+}
+
+.icon.reminders, .icon.gmail, .icon.photos {
+  background: #fff;
+}
+
+.icon.music {
+  background: linear-gradient(145deg,#ff657d,#ed174d);
+}
+
+.icon.camera {
+  background: linear-gradient(145deg,#f2f2f2,#b7bbc1);
+}
+
+.icon.weather {
+  background: linear-gradient(145deg,#52c8ff,#1978e8);
+}
+
+.icon.instagram {
+  background: linear-gradient(135deg,#ffd76a,#fa3a75 48%,#7638d7);
+}
+
+.icon.safari {
+  background: linear-gradient(145deg,#6be2ff,#0879df);
 }
 
 .app-name {
@@ -298,18 +389,7 @@ body {
   text-shadow: 0 1px 4px #000;
 }
 
-.green { background: #32c759; }
-.yellow { background: linear-gradient(#f6d54d 25%,white 25%); color: #555; }
-.white { background: #f7f7fa; color: #4285f4; }
-.pink { background: linear-gradient(135deg,#fa70b2,#a33bdb); }
-.gmail { background: white; color: #e7473c; }
-.photos { background: white; }
-.camera { background: #444; }
-.weather { background: linear-gradient(#63caff,#2875dc); }
-.instagram { background: linear-gradient(135deg,#ffca50,#f02785,#7137d7); }
-.phone-icon { background: #32c759; }
-.safari { background: linear-gradient(#7de0ff,#0878db); }
-
+/* DOCK */
 .dock {
   position: absolute;
   bottom: 25px;
@@ -333,6 +413,7 @@ body {
 
 .dock .app-name { display: none; }
 
+/* HALAMAN APLIKASI */
 .app-page {
   position: absolute;
   inset: 0;
@@ -395,6 +476,7 @@ body {
 
 @media (min-width: 600px) {
   body { padding: 20px; }
+
   .phone {
     height: min(900px, calc(100dvh - 40px));
     border: 7px solid #333;
@@ -407,12 +489,15 @@ body {
 <body>
 <main class="phone">
   <div class="wallpaper"></div>
+
   <div class="status">
     <span>19:00</span>
     <span>▮▮▮　◉　▰</span>
   </div>
+
   <div class="island"></div>
 
+  <!-- LOCK SCREEN -->
   <section class="screen lock" id="lock">
     <div class="date">31 OCTOBER</div>
     <div class="clock">19:00</div>
@@ -454,6 +539,7 @@ body {
     </div>
   </section>
 
+  <!-- PASSCODE -->
   <section class="screen passcode hidden" id="pass">
     <div>
       <div style="font-size:30px">🔒</div>
@@ -487,47 +573,183 @@ body {
     </div>
   </section>
 
+  <!-- HOME SCREEN -->
   <section class="screen home hidden" id="home">
-    <div class="day">Saturday, October 31</div>
+    <div class="home-widgets">
+      <div class="weather-widget">
+        <div class="widget-city">Jakarta</div>
+        <div class="widget-temp">26° <span>☀️☁️</span></div>
+        <div class="widget-condition">Partly Cloudy</div>
+        <div class="widget-range">H:31° &nbsp; L:24°</div>
+      </div>
+
+      <div class="clock-widget">
+        <div class="widget-time">19:00</div>
+        <div class="widget-day">Saturday</div>
+      </div>
+    </div>
+
     <div class="apps">
+      <!-- MESSAGES -->
       <button class="app" data-app="Messages">
-        <span class="icon green">●</span><span class="app-name">Messages</span>
+        <span class="icon messages">
+          <svg viewBox="0 0 100 100">
+            <path fill="#fff" d="M22 25h56a9 9 0 0 1 9 9v30a9 9 0 0 1-9 9H45L28 86V73h-6a9 9 0 0 1-9-9V34a9 9 0 0 1 9-9z"/>
+          </svg>
+        </span>
+        <span class="app-name">Messages</span>
       </button>
+
+      <!-- NOTES -->
       <button class="app" data-app="Notes">
-        <span class="icon yellow">▤</span><span class="app-name">Notes</span>
+        <span class="icon notes">
+          <svg viewBox="0 0 100 100">
+            <path d="M5 29H95M5 48H95M5 67H95M5 86H95" stroke="#c7c7c7" stroke-width="2" fill="none"/>
+          </svg>
+        </span>
+        <span class="app-name">Notes</span>
       </button>
+
+      <!-- REMINDERS -->
       <button class="app" data-app="Reminders">
-        <span class="icon white">☷</span><span class="app-name">Reminders</span>
+        <span class="icon reminders">
+          <svg viewBox="0 0 100 100">
+            <circle cx="20" cy="27" r="7" fill="#1688ff"/>
+            <circle cx="20" cy="50" r="7" fill="#ff453a"/>
+            <circle cx="20" cy="73" r="7" fill="#ff9f0a"/>
+            <path d="M37 27H85M37 50H85M37 73H85" stroke="#c7c7cc" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="app-name">Reminders</span>
       </button>
+
+      <!-- MUSIC -->
       <button class="app" data-app="Apple Music">
-        <span class="icon pink">♫</span><span class="app-name">Music</span>
+        <span class="icon music">
+          <svg viewBox="0 0 100 100">
+            <path d="M59 20v49a12 12 0 1 1-9-12V32l31-8v36a12 12 0 1 1-9-12V18z" fill="#fff"/>
+          </svg>
+        </span>
+        <span class="app-name">Music</span>
       </button>
+
+      <!-- GMAIL -->
       <button class="app" data-app="Gmail">
-        <span class="icon gmail">M</span><span class="app-name">Gmail</span>
+        <span class="icon gmail">
+          <svg viewBox="0 0 100 100">
+            <path d="M15 75V28l35 27 35-27v47" fill="none" stroke="#4285f4" stroke-width="11" stroke-linejoin="round"/>
+            <path d="M15 28l35 27" stroke="#ea4335" stroke-width="11"/>
+            <path d="M50 55l35-27" stroke="#34a853" stroke-width="11"/>
+            <path d="M15 28v47" stroke="#fbbc04" stroke-width="11"/>
+          </svg>
+        </span>
+        <span class="app-name">Gmail</span>
       </button>
+
+      <!-- PHOTOS -->
       <button class="app" data-app="Photos">
-        <span class="icon photos">🌈</span><span class="app-name">Photos</span>
+        <span class="icon photos">
+          <svg viewBox="0 0 100 100">
+            <g transform="translate(50 50)">
+              <ellipse cx="0" cy="-23" rx="10" ry="21" fill="#ff453a"/>
+              <ellipse cx="0" cy="-23" rx="10" ry="21" fill="#ff9f0a" transform="rotate(45)"/>
+              <ellipse cx="0" cy="-23" rx="10" ry="21" fill="#ffd60a" transform="rotate(90)"/>
+              <ellipse cx="0" cy="-23" rx="10" ry="21" fill="#34c759" transform="rotate(135)"/>
+              <ellipse cx="0" cy="-23" rx="10" ry="21" fill="#00c7be" transform="rotate(180)"/>
+              <ellipse cx="0" cy="-23" rx="10" ry="21" fill="#0a84ff" transform="rotate(225)"/>
+              <ellipse cx="0" cy="-23" rx="10" ry="21" fill="#5e5ce6" transform="rotate(270)"/>
+              <ellipse cx="0" cy="-23" rx="10" ry="21" fill="#bf5af2" transform="rotate(315)"/>
+            </g>
+          </svg>
+        </span>
+        <span class="app-name">Photos</span>
       </button>
+
+      <!-- CAMERA -->
       <button class="app" data-app="Camera">
-        <span class="icon camera">📷</span><span class="app-name">Camera</span>
+        <span class="icon camera">
+          <svg viewBox="0 0 100 100">
+            <rect x="12" y="27" width="76" height="54" rx="12" fill="#25272b"/>
+            <path d="M28 27l7-10h24l8 10" fill="#34363a"/>
+            <circle cx="52" cy="54" r="20" fill="#101216" stroke="#777d86" stroke-width="5"/>
+            <circle cx="52" cy="54" r="12" fill="#27394a" stroke="#9bb8cf" stroke-width="3"/>
+            <circle cx="76" cy="36" r="3" fill="#ffd60a"/>
+          </svg>
+        </span>
+        <span class="app-name">Camera</span>
       </button>
+
+      <!-- WEATHER -->
       <button class="app" data-app="Weather">
-        <span class="icon weather">🌙</span><span class="app-name">Cuaca</span>
+        <span class="icon weather">
+          <svg viewBox="0 0 100 100">
+            <circle cx="65" cy="30" r="18" fill="#ffd60a"/>
+            <path d="M23 70a18 18 0 0 1 34-8 17 17 0 0 1 25 14 13 13 0 0 1-13 13H30a15 15 0 0 1-7-19z" fill="#fff"/>
+          </svg>
+        </span>
+        <span class="app-name">Cuaca</span>
       </button>
+
+      <!-- INSTAGRAM -->
       <button class="app" data-app="Instagram">
-        <span class="icon instagram">◎</span><span class="app-name">Instagram</span>
+        <span class="icon instagram">
+          <svg viewBox="0 0 100 100">
+            <rect x="22" y="22" width="56" height="56" rx="17" fill="none" stroke="#fff" stroke-width="7"/>
+            <circle cx="50" cy="50" r="14" fill="none" stroke="#fff" stroke-width="7"/>
+            <circle cx="68" cy="32" r="4" fill="#fff"/>
+          </svg>
+        </span>
+        <span class="app-name">Instagram</span>
       </button>
     </div>
 
+    <!-- DOCK -->
     <div class="dock">
-      <button class="app" data-app="Phone"><span class="icon phone-icon">☎</span><span class="app-name">Phone</span></button>
-      <button class="app" data-app="Safari"><span class="icon safari">🧭</span><span class="app-name">Safari</span></button>
-      <button class="app" data-app="Messages"><span class="icon green">●</span><span class="app-name">iMessage</span></button>
-      <button class="app" data-app="Apple Music"><span class="icon pink">♫</span><span class="app-name">Music</span></button>
+      <button class="app" data-app="Phone">
+        <span class="icon phone-icon">
+          <svg viewBox="0 0 100 100">
+            <path d="M30 17c-5-3-12 5-14 11-4 16 17 43 30 54 10 9 26 14 34 6l8-10-22-17-9 9c-10-5-20-15-24-25l8-9z" fill="#fff"/>
+          </svg>
+        </span>
+        <span class="app-name">Phone</span>
+      </button>
+
+      <button class="app" data-app="Safari">
+        <span class="icon safari">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="39" fill="#fff"/>
+            <circle cx="50" cy="50" r="34" fill="#087edb"/>
+            <path d="M65 29L55 55 34 70 44 44z" fill="#ff453a"/>
+            <path d="M35 70l10-26 20-15-10 26z" fill="#fff"/>
+            <circle cx="50" cy="50" r="3" fill="#fff"/>
+          </svg>
+        </span>
+        <span class="app-name">Safari</span>
+      </button>
+
+      <button class="app" data-app="Messages">
+        <span class="icon messages">
+          <svg viewBox="0 0 100 100">
+            <path fill="#fff" d="M22 25h56a9 9 0 0 1 9 9v30a9 9 0 0 1-9 9H45L28 86V73h-6a9 9 0 0 1-9-9V34a9 9 0 0 1 9-9z"/>
+          </svg>
+        </span>
+        <span class="app-name">iMessage</span>
+      </button>
+
+      <button class="app" data-app="Apple Music">
+        <span class="icon music">
+          <svg viewBox="0 0 100 100">
+            <path d="M59 20v49a12 12 0 1 1-9-12V32l31-8v36a12 12 0 1 1-9-12V18z" fill="#fff"/>
+          </svg>
+        </span>
+        <span class="app-name">Music</span>
+      </button>
     </div>
+
     <div class="indicator" style="position:absolute;bottom:7px;left:50%;transform:translateX(-50%)"></div>
   </section>
 
+  <!-- HALAMAN APLIKASI -->
   <section class="app-page hidden" id="appPage">
     <div class="app-header">
       <button class="back" id="back">‹ Home</button>
@@ -553,6 +775,7 @@ function openPasscode() {
 document.getElementById("slide").addEventListener("click", openPasscode);
 
 let startY = 0;
+
 lock.addEventListener("touchstart", e => {
   startY = e.touches[0].clientY;
 }, {passive:true});
@@ -572,6 +795,7 @@ function updateDots() {
 document.querySelectorAll("[data-num]").forEach(button => {
   button.addEventListener("click", () => {
     if (code.length >= 4) return;
+
     code += button.dataset.num;
     updateDots();
 
@@ -584,6 +808,7 @@ document.querySelectorAll("[data-num]").forEach(button => {
       } else {
         document.getElementById("error").textContent =
           "Incorrect passcode";
+
         setTimeout(() => {
           code = "";
           updateDots();
@@ -606,8 +831,11 @@ const appContent = document.getElementById("appContent");
 function openApp(name) {
   home.classList.add("hidden");
   appPage.classList.remove("hidden");
-  appPage.classList.toggle("dark",
-    ["Messages","Apple Music","Camera","Phone"].includes(name));
+
+  appPage.classList.toggle(
+    "dark",
+    ["Messages", "Apple Music", "Camera", "Phone"].includes(name)
+  );
 
   document.getElementById("appTitle").textContent = name;
   appContent.innerHTML = "";
