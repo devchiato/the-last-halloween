@@ -1,286 +1,682 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>THE LAST HALLOWEEN</title>
+
 <style>
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  min-height: 100vh;
-  background: #08080c;
-  color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 24px 12px;
+  background: #111;
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Helvetica Neue", sans-serif;
+  color: white;
 }
 
 .phone {
   width: 100%;
-  max-width: 390px;
-  min-height: 720px;
-  height: min(820px, 94vh);
-  border: 3px solid #41414a;
-  border-radius: 48px;
-  overflow: hidden;
+  max-width: 430px;
+  height: 100dvh;
+  min-height: 650px;
+  margin: auto;
   position: relative;
+  overflow: hidden;
+  background: #222;
+}
+
+.wallpaper {
+  position: absolute;
+  inset: 0;
   background:
-    radial-gradient(ellipse at 50% 24%, #681626 0%, #25101b 32%, #09090d 72%);
-  box-shadow: 0 0 50px #560b252b, inset 0 0 0 5px #111116;
+    linear-gradient(#0002, #0001 45%, #0005),
+    url("haechan-wallpaper.jpg") center / cover;
 }
 
 .status {
+  position: absolute;
+  top: 13px;
+  left: 28px;
+  right: 28px;
   display: flex;
   justify-content: space-between;
-  padding: 18px 27px 0;
-  font-size: 13px;
-  position: relative;
-  z-index: 2;
+  font-size: 15px;
+  font-weight: 600;
+  z-index: 5;
 }
 
 .island {
-  width: 100px;
-  height: 27px;
+  position: absolute;
+  z-index: 6;
+  width: 105px;
+  height: 30px;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #050505;
   border-radius: 20px;
-  background: #030305;
-  margin: -24px auto 0;
 }
 
 .lock {
+  position: absolute;
+  inset: 0;
   text-align: center;
-  padding: 42px 18px 0;
 }
 
 .date {
-  color: #e7cbd1;
-  font-size: 13px;
-  letter-spacing: 1px;
+  position: absolute;
+  top: 87px;
+  width: 100%;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .clock {
-  font-size: 76px;
+  position: absolute;
+  top: 108px;
+  width: 100%;
+  font-size: 88px;
+  line-height: 1.1;
   font-weight: 200;
-  letter-spacing: -3px;
-  margin: 4px 0 18px;
+  letter-spacing: -5px;
 }
 
-.notice {
-  margin: 0 15px;
+.locked {
+  position: absolute;
+  top: 199px;
+  width: 100%;
+  font-size: 10px;
+  letter-spacing: 2px;
+  opacity: .8;
+}
+
+.notifications {
+  position: absolute;
+  top: 255px;
+  left: 15px;
+  right: 15px;
+  display: grid;
+  gap: 8px;
+}
+
+.notification {
+  padding: 12px 14px;
+  border-radius: 20px;
+  background: rgba(245,245,250,.78);
+  color: #222;
   text-align: left;
-  padding: 15px;
-  border: 1px solid #ffffff20;
-  border-radius: 22px;
-  background: #211a23d9;
-  backdrop-filter: blur(12px);
+  border: 1px solid #ffffff55;
+  backdrop-filter: blur(25px) saturate(160%);
+  -webkit-backdrop-filter: blur(25px) saturate(160%);
 }
 
-.notice small {
-  color: #bdb1c3;
-  float: right;
+.notif-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
 }
 
-.notice p {
-  margin-bottom: 0;
-  line-height: 1.5;
+.msg-icon {
+  width: 25px;
+  height: 25px;
+  border-radius: 7px;
+  background: #32c759;
+  color: white;
+  display: grid;
+  place-items: center;
   font-size: 14px;
-}
-
-.spacer {
-  height: 28px;
-}
-
-.panel {
-  margin: 0 12px;
-  border: 1px solid #ffffff20;
-  border-radius: 25px;
-  background: #0c0b10eF;
-  overflow: hidden;
-}
-
-.panel-head {
-  text-align: center;
-  padding: 15px;
-  background: #1b1720;
-  border-bottom: 1px solid #ffffff12;
-}
-
-.panel-head strong {
-  display: block;
-  font-size: 14px;
-}
-
-.panel-head small {
-  color: #a59aaa;
-}
-
-.messages {
-  padding: 15px 12px;
-  min-height: 150px;
 }
 
 .sender {
-  color: #b8a9c0;
-  font-size: 11px;
-  margin: 10px 0 5px 5px;
+  font-size: 12px;
+  font-weight: 650;
+  flex: 1;
 }
 
-.bubble {
-  width: fit-content;
-  max-width: 90%;
-  background: #292330;
-  border-radius: 17px 17px 17px 5px;
-  padding: 10px 13px;
+.now {
+  font-size: 10px;
+  color: #777;
+}
+
+.message {
+  padding-left: 33px;
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
-.mine {
-  margin: 12px 0 0 auto;
-  background: #74243d;
-  border-radius: 17px 17px 5px 17px;
-}
-
-.actions {
-  padding: 12px;
-  display: grid;
-  gap: 9px;
-  border-top: 1px solid #ffffff14;
-}
-
-button {
+.slide {
+  position: absolute;
+  bottom: 12px;
   width: 100%;
-  border: 1px solid #6e3348;
-  background: #21141e;
-  color: #f4e9ed;
-  border-radius: 13px;
-  padding: 12px;
-  font: inherit;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  cursor: pointer;
   font-size: 13px;
+  text-shadow: 0 1px 5px #000;
+}
+
+.indicator {
+  width: 135px;
+  height: 5px;
+  background: white;
+  border-radius: 10px;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+.hidden { display: none !important; }
+
+.passcode {
+  background: rgba(30,30,35,.55);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 25px;
+}
+
+.pass-title {
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.pass-sub {
+  font-size: 13px;
+  opacity: .75;
+  margin-bottom: 25px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 25px 0;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+
+.dot.filled { background: white; }
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 250px;
+  margin: auto;
+}
+
+.key {
+  width: 62px;
+  height: 62px;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff25;
+  color: white;
+  font-size: 26px;
+  font-weight: 300;
+  margin: auto;
   cursor: pointer;
 }
 
-button:active {
-  background: #70213a;
+.key:active { background: #ffffff55; }
+
+.key small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 1px;
 }
 
-.foot {
-  text-align: center;
-  color: #746474;
-  font-size: 10px;
-  letter-spacing: 2px;
-  padding: 18px 5px 24px;
+.error {
+  height: 20px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.cancel {
+  background: none;
+  border: none;
+  color: white;
+  margin-top: 8px;
+  cursor: pointer;
 }
 
 .home {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 105px;
-  height: 4px;
-  border-radius: 5px;
-  background: white;
+  padding: 65px 20px 120px;
+  background: linear-gradient(#0002, #0004);
 }
 
-.hidden { display: none; }
+.day {
+  font-size: 13px;
+  margin-bottom: 25px;
+}
 
-@media (max-height: 760px) {
-  .phone { height: auto; min-height: 700px; }
-  .lock { padding-top: 25px; }
-  .clock { font-size: 62px; }
+.apps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px 8px;
+}
+
+.app {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: white;
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  box-shadow: 0 2px 5px #0003;
+}
+
+.app-name {
+  font-size: 10px;
+  text-shadow: 0 1px 4px #000;
+}
+
+.green { background: #32c759; }
+.yellow { background: linear-gradient(#f6d54d 25%,white 25%); color: #555; }
+.white { background: #f7f7fa; color: #4285f4; }
+.pink { background: linear-gradient(135deg,#fa70b2,#a33bdb); }
+.gmail { background: white; color: #e7473c; }
+.photos { background: white; }
+.camera { background: #444; }
+.weather { background: linear-gradient(#63caff,#2875dc); }
+.instagram { background: linear-gradient(135deg,#ffca50,#f02785,#7137d7); }
+.phone-icon { background: #32c759; }
+.safari { background: linear-gradient(#7de0ff,#0878db); }
+
+.dock {
+  position: absolute;
+  bottom: 25px;
+  left: 13px;
+  right: 13px;
+  height: 88px;
+  border-radius: 28px;
+  background: #ffffff35;
+  border: 1px solid #ffffff30;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  align-items: center;
+}
+
+.dock .icon {
+  width: 51px;
+  height: 51px;
+}
+
+.dock .app-name { display: none; }
+
+.app-page {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  background: #f2f2f7;
+  color: #111;
+  padding: 55px 20px 30px;
+}
+
+.app-page.dark {
+  background: #000;
+  color: white;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.app-header h2 { font-size: 22px; }
+
+.back {
+  border: 0;
+  background: none;
+  color: #1687ff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.chat {
+  padding: 13px 0;
+  border-bottom: 1px solid #8884;
+  cursor: pointer;
+}
+
+.preview {
+  font-size: 13px;
+  opacity: .65;
+  margin-top: 5px;
+}
+
+.bubble {
+  background: #e5e5ea;
+  color: #111;
+  padding: 10px 14px;
+  border-radius: 18px;
+  margin: 10px 0;
+  width: fit-content;
+  max-width: 85%;
+  font-size: 14px;
+}
+
+.mine {
+  background: #0a84ff;
+  color: white;
+  margin-left: auto;
+}
+
+@media (min-width: 600px) {
+  body { padding: 20px; }
+  .phone {
+    height: min(900px, calc(100dvh - 40px));
+    border: 7px solid #333;
+    border-radius: 45px;
+  }
 }
 </style>
 </head>
 
 <body>
 <main class="phone">
+  <div class="wallpaper"></div>
   <div class="status">
-    <span>11:59</span>
-    <span>● ● ▰</span>
+    <span>19:00</span>
+    <span>▮▮▮　◉　▰</span>
   </div>
-
   <div class="island"></div>
 
-  <section class="lock">
-    <div class="date">SATURDAY, OCTOBER 31</div>
-    <div class="clock">19:01</div>
+  <section class="screen lock" id="lock">
+    <div class="date">31 OCTOBER</div>
+    <div class="clock">19:00</div>
+    <div class="locked">LOCKED</div>
 
-    <div class="notice">
-      <small>now</small>
-      <strong>NO NAME</strong>
-      <p>why are you celebrating without me?</p>
+    <div class="notifications">
+      <div class="notification">
+        <div class="notif-head">
+          <span class="msg-icon">●</span>
+          <span class="sender">Mark Lee</span>
+          <span class="now">now</span>
+        </div>
+        <div class="message">bentar ya abis ini otw jemput</div>
+      </div>
+
+      <div class="notification">
+        <div class="notif-head">
+          <span class="msg-icon">●</span>
+          <span class="sender">TONGKRONGAN ASIK</span>
+          <span class="now">now</span>
+        </div>
+        <div class="message"><b>Bang Johnny:</b> pada kesini jam berapa?</div>
+      </div>
+
+      <div class="notification">
+        <div class="notif-head">
+          <span class="msg-icon">●</span>
+          <span class="sender">TONGKRONGAN ASIK</span>
+          <span class="now">now</span>
+        </div>
+        <div class="message"><b>Bang Doyoung:</b> bentarrrrr</div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide">
+      <span>⌃</span>
+      <span>slide up to open</span>
+      <div class="indicator"></div>
     </div>
   </section>
 
-  <div class="spacer"></div>
+  <section class="screen passcode hidden" id="pass">
+    <div>
+      <div style="font-size:30px">🔒</div>
+      <div class="pass-title">Enter Passcode</div>
+      <div class="pass-sub">iPhone locked</div>
 
-  <section class="panel">
-    <header class="panel-head">
-      <strong>127 🎃</strong>
-      <small>8 people · iMessage</small>
-    </header>
+      <div class="dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
 
-    <div class="messages" id="messages">
-      <div class="sender">Johnny</div>
-      <div class="bubble">pada kesini jam berapa?</div>
+      <div class="keypad">
+        <button class="key" data-num="1">1<small></small></button>
+        <button class="key" data-num="2">2<small>ABC</small></button>
+        <button class="key" data-num="3">3<small>DEF</small></button>
+        <button class="key" data-num="4">4<small>GHI</small></button>
+        <button class="key" data-num="5">5<small>JKL</small></button>
+        <button class="key" data-num="6">6<small>MNO</small></button>
+        <button class="key" data-num="7">7<small>PQRS</small></button>
+        <button class="key" data-num="8">8<small>TUV</small></button>
+        <button class="key" data-num="9">9<small>WXYZ</small></button>
+        <span></span>
+        <button class="key" data-num="0">0<small></small></button>
+        <span></span>
+      </div>
 
-      <div class="sender">Doyoung</div>
-      <div class="bubble">bentar masih beli seblak</div>
-
-      <div class="sender">Haechan</div>
-      <div class="bubble">guys... who just texted me?</div>
-    </div>
-
-    <div class="actions">
-      <button onclick="nextMessage()">OPEN UNKNOWN'S MESSAGE</button>
-      <button onclick="showClue()">INVESTIGATE THE CLUE</button>
+      <div class="error" id="error"></div>
+      <button class="cancel" id="cancel">Cancel</button>
     </div>
   </section>
 
-  <div class="foot">DO NOT TRUST THE LAST ONLINE STATUS.</div>
-  <div class="home"></div>
+  <section class="screen home hidden" id="home">
+    <div class="day">Saturday, October 31</div>
+    <div class="apps">
+      <button class="app" data-app="Messages">
+        <span class="icon green">●</span><span class="app-name">Messages</span>
+      </button>
+      <button class="app" data-app="Notes">
+        <span class="icon yellow">▤</span><span class="app-name">Notes</span>
+      </button>
+      <button class="app" data-app="Reminders">
+        <span class="icon white">☷</span><span class="app-name">Reminders</span>
+      </button>
+      <button class="app" data-app="Apple Music">
+        <span class="icon pink">♫</span><span class="app-name">Music</span>
+      </button>
+      <button class="app" data-app="Gmail">
+        <span class="icon gmail">M</span><span class="app-name">Gmail</span>
+      </button>
+      <button class="app" data-app="Photos">
+        <span class="icon photos">🌈</span><span class="app-name">Photos</span>
+      </button>
+      <button class="app" data-app="Camera">
+        <span class="icon camera">📷</span><span class="app-name">Camera</span>
+      </button>
+      <button class="app" data-app="Weather">
+        <span class="icon weather">🌙</span><span class="app-name">Cuaca</span>
+      </button>
+      <button class="app" data-app="Instagram">
+        <span class="icon instagram">◎</span><span class="app-name">Instagram</span>
+      </button>
+    </div>
+
+    <div class="dock">
+      <button class="app" data-app="Phone"><span class="icon phone-icon">☎</span><span class="app-name">Phone</span></button>
+      <button class="app" data-app="Safari"><span class="icon safari">🧭</span><span class="app-name">Safari</span></button>
+      <button class="app" data-app="Messages"><span class="icon green">●</span><span class="app-name">iMessage</span></button>
+      <button class="app" data-app="Apple Music"><span class="icon pink">♫</span><span class="app-name">Music</span></button>
+    </div>
+    <div class="indicator" style="position:absolute;bottom:7px;left:50%;transform:translateX(-50%)"></div>
+  </section>
+
+  <section class="app-page hidden" id="appPage">
+    <div class="app-header">
+      <button class="back" id="back">‹ Home</button>
+      <h2 id="appTitle">Messages</h2>
+      <span></span>
+    </div>
+    <div id="appContent"></div>
+  </section>
 </main>
 
 <script>
-let step = 0;
+const lock = document.getElementById("lock");
+const pass = document.getElementById("pass");
+const home = document.getElementById("home");
+const appPage = document.getElementById("appPage");
+let code = "";
 
-function nextMessage() {
-  const messages = document.getElementById("messages");
+function openPasscode() {
+  lock.classList.add("hidden");
+  pass.classList.remove("hidden");
+}
 
-  const story = [
-    ["UNKNOWN", "I'm already inside the house."],
-    ["Jaehyun", "Johnny... did you invite anyone else?"],
-    ["UNKNOWN", "Mark, tell them what happened on October 30."],
-    ["Taeyong", "Wait. Why is Mark's contact offline?"]
-  ];
+document.getElementById("slide").addEventListener("click", openPasscode);
 
-  if (step < story.length) {
-    const [name, text] = story[step];
+let startY = 0;
+lock.addEventListener("touchstart", e => {
+  startY = e.touches[0].clientY;
+}, {passive:true});
 
-    const sender = document.createElement("div");
-    sender.className = "sender";
-    sender.textContent = name;
+lock.addEventListener("touchend", e => {
+  if (startY - e.changedTouches[0].clientY > 35) {
+    openPasscode();
+  }
+}, {passive:true});
 
-    const bubble = document.createElement("div");
-    bubble.className = "bubble" +
-      (name === "UNKNOWN" ? " mine" : "");
-    bubble.textContent = text;
+function updateDots() {
+  document.querySelectorAll(".dot").forEach((dot, i) => {
+    dot.classList.toggle("filled", i < code.length);
+  });
+}
 
-    messages.append(sender, bubble);
-    step++;
-  } else {
-    alert("NEW MESSAGE: You have 1 unread message.");
+document.querySelectorAll("[data-num]").forEach(button => {
+  button.addEventListener("click", () => {
+    if (code.length >= 4) return;
+    code += button.dataset.num;
+    updateDots();
+
+    if (code.length === 4) {
+      if (code === "0127") {
+        setTimeout(() => {
+          pass.classList.add("hidden");
+          home.classList.remove("hidden");
+        }, 200);
+      } else {
+        document.getElementById("error").textContent =
+          "Incorrect passcode";
+        setTimeout(() => {
+          code = "";
+          updateDots();
+          document.getElementById("error").textContent = "";
+        }, 800);
+      }
+    }
+  });
+});
+
+document.getElementById("cancel").addEventListener("click", () => {
+  pass.classList.add("hidden");
+  lock.classList.remove("hidden");
+  code = "";
+  updateDots();
+});
+
+const appContent = document.getElementById("appContent");
+
+function openApp(name) {
+  home.classList.add("hidden");
+  appPage.classList.remove("hidden");
+  appPage.classList.toggle("dark",
+    ["Messages","Apple Music","Camera","Phone"].includes(name));
+
+  document.getElementById("appTitle").textContent = name;
+  appContent.innerHTML = "";
+
+  if (name === "Messages") {
+    appContent.innerHTML = `
+      <div class="chat" onclick="openChat('mark')">
+        <b>Mark Lee</b>
+        <div class="preview">bentar ya abis ini otw jemput</div>
+      </div>
+      <div class="chat" onclick="openChat('group')">
+        <b>TONGKRONGAN ASIK</b>
+        <div class="preview">Bang Doyoung: bentarrrrr</div>
+      </div>`;
+  } else if (name === "Notes") {
+    appContent.innerHTML =
+      "<h3>Halloween 🎃</h3><p>31 October · 19:00</p><p>Ke rumah Johnny</p>";
+  } else if (name === "Reminders") {
+    appContent.innerHTML =
+      "<p>◯ Jemput Haechan</p><p>◯ Halloween party</p>";
+  } else if (name === "Gmail") {
+    appContent.innerHTML =
+      "<h3>Security alert</h3><p>A sign-in was detected on October 30.</p>";
+  } else if (name === "Weather") {
+    appContent.innerHTML =
+      "<h1>🌙 19°</h1><p>Clear night</p>";
+  } else if (name === "Photos") {
+    appContent.innerHTML =
+      "<h3>Recents</h3><p>Some memories are better left unopened.</p>";
+  } else if (name === "Instagram") {
+    appContent.innerHTML =
+      "<h3>haechan</h3><p>halloween night 🎃</p>";
+  } else if (name === "Apple Music") {
+    appContent.innerHTML =
+      "<h3>♫ Night Drive</h3><p>Unknown Artist</p>";
+  } else if (name === "Camera") {
+    appContent.innerHTML = "<h1>📷</h1><p>Camera</p>";
+  } else if (name === "Phone") {
+    appContent.innerHTML =
+      "<h3>Recents</h3><p>Johnny · 18:42</p><p>Mark Lee · No answer</p>";
+  } else if (name === "Safari") {
+    appContent.innerHTML =
+      "<h3>Search</h3><p>mark lee accident october 30</p>";
   }
 }
 
-function showClue() {
-  alert("CLUE 01\n\nOctober 30 — 11:47 PM\n\nAn accident report. One name keeps appearing: MARK LEE.\n\n[More evidence locked]");
+function openChat(which) {
+  document.getElementById("appTitle").textContent =
+    which === "mark" ? "Mark Lee" : "TONGKRONGAN ASIK";
+
+  appContent.innerHTML = which === "mark" ? `
+    <div class="bubble">bentar ya abis ini otw jemput</div>
+    <div class="bubble mine">oke, hati-hati</div>
+    <p style="text-align:center;font-size:12px;opacity:.6">
+      Mark Lee is not online
+    </p>` : `
+    <div class="bubble">Bang Johnny: pada kesini jam berapa?</div>
+    <div class="bubble">Bang Doyoung: bentarrrrr</div>
+    <div class="bubble mine">otw bentar lagi</div>`;
 }
+
+document.querySelectorAll("[data-app]").forEach(button => {
+  button.addEventListener("click", () => openApp(button.dataset.app));
+});
+
+document.getElementById("back").addEventListener("click", () => {
+  appPage.classList.add("hidden");
+  home.classList.remove("hidden");
+});
 </script>
 </body>
 </html>
