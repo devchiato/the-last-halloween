@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -34,15 +35,48 @@ body {
     url("haechan-wallpaper.jpg") center / cover;
 }
 
+.status {
+  position: absolute;
+  top: 13px;
+  left: 28px;
+  right: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  z-index: 5;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.signal-icon {
+  display: block;
+  width: 17px;
+  height: 14px;
+}
+
+.network {
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 2px;
+}
+
 .battery {
   position: relative;
+  display: flex;
+  align-items: center;
   width: 25px;
   height: 12px;
+  padding: 1.5px;
+  margin-left: 1px;
   border: 1.5px solid white;
   border-radius: 3.5px;
   box-sizing: border-box;
-  padding: 1.5px;
-  margin-left: 2px;
 }
 
 .battery-level {
@@ -61,7 +95,6 @@ body {
   height: 4px;
   background: white;
   border-radius: 0 1px 1px 0;
-}
 }
 
 .island {
@@ -508,10 +541,25 @@ body {
 <main class="phone">
   <div class="wallpaper"></div>
 
- <div class="battery">
-  <span class="battery-level"></span>
-  <span class="battery-cap"></span>
-</div>
+  <div class="status">
+    <span class="status-time">19:00</span>
+
+    <div class="status-icons">
+      <svg class="signal-icon" viewBox="0 0 18 14" aria-label="Sinyal">
+        <path d="M1 13V10H4V13Z" fill="currentColor"/>
+        <path d="M5 13V7H8V13Z" fill="currentColor"/>
+        <path d="M9 13V4H12V13Z" fill="currentColor"/>
+        <path d="M13 13V1H16V13Z" fill="currentColor"/>
+      </svg>
+
+      <span class="network">5G</span>
+
+      <div class="battery" aria-label="Baterai 75 persen">
+        <span class="battery-level"></span>
+        <span class="battery-cap"></span>
+      </div>
+    </div>
+  </div>
 
   <div class="island"></div>
 
