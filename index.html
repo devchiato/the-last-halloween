@@ -525,6 +525,133 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
+  
+/* IMESSAGE LIST */
+.app-page:has(.messages-screen) {
+  background: #fff;
+  color: #111;
+  padding: 0;
+}
+
+.messages-screen {
+  position: absolute;
+  inset: 0;
+  padding: 100px 14px 100px;
+  background: #fff;
+  color: #111;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.messages-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.messages-top button {
+  border: 0;
+  background: #f5f5f7;
+  border-radius: 24px;
+  padding: 12px 16px;
+  color: #111;
+  font-size: 15px;
+}
+
+.messages-top h2 {
+  font-size: 21px;
+  margin: 0;
+}
+
+.message-row {
+  display: flex;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid #e5e5e5;
+  align-items: center;
+  cursor: pointer;
+}
+
+.message-avatar {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  background: linear-gradient(#b8c9e8, #788ab9);
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 25px;
+}
+
+.message-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.message-name-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.message-name {
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.message-date,
+.message-preview {
+  color: #8e8e93;
+  font-size: 12px;
+}
+
+.message-preview {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.message-unread {
+  width: 9px;
+  height: 9px;
+  min-width: 9px;
+  border-radius: 50%;
+  background: #0788ff;
+}
+
+.messages-bottom {
+  position: absolute;
+  bottom: 18px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.messages-search {
+  flex: 1;
+  min-width: 0;
+  border-radius: 25px;
+  background: #f0f0f5;
+  padding: 13px 16px;
+  color: #8e8e93;
+  font-size: 15px;
+}
+
+.new-message {
+  border: 0;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  background: #f0f0f5;
+  font-size: 23px;
+  color: #111;
+}
+
 
 .chat {
   padding: 13px 0;
@@ -1767,17 +1894,78 @@ function openApp(name) {
   document.getElementById("appTitle").textContent = name;
   appContent.innerHTML = "";
 
-  if (name === "Messages") {
-    appContent.innerHTML = `
-      <div class="chat" onclick="openChat('mark')">
-        <b>Mark Lee</b>
-        <div class="preview">bentar ya abis ini otw jemput</div>
+  
+if (name === "Messages") {
+  appContent.innerHTML = `
+    <div class="messages-screen">
+      <div class="messages-top">
+        <button onclick="goHome()">‹ Back</button>
+        <h2>Messages</h2>
+        <button onclick="alert('Edit Messages')">Edit</button>
       </div>
-      <div class="chat" onclick="openChat('group')">
-        <b>TONGKRONGAN ASIK</b>
-        <div class="preview">Bang Doyoung: bentarrrrr</div>
-      </div>`;
- 
+
+      <div class="message-row" onclick="openChat('mark')">
+        <div class="message-avatar">M</div>
+        <div class="message-info">
+          <div class="message-name-line">
+            <span class="message-name">Mark Lee</span>
+            <span class="message-date">Yesterday</span>
+          </div>
+          <div class="message-preview">
+            bentar ya abis ini otw jemput
+          </div>
+        </div>
+        <span style="color:#bbb">›</span>
+      </div>
+
+      <div class="message-row" onclick="openChat('group')">
+        <div class="message-avatar">T</div>
+        <div class="message-info">
+          <div class="message-name-line">
+            <span class="message-name">TONGKRONGAN ASIK</span>
+            <span class="message-date">Wednesday</span>
+          </div>
+          <div class="message-preview">
+            Bang Doyoung: bentarrrrr
+          </div>
+        </div>
+        <span style="color:#bbb">›</span>
+      </div>
+
+      <div class="message-row" onclick="openChat('mark')">
+        <div class="message-avatar">J</div>
+        <div class="message-info">
+          <div class="message-name-line">
+            <span class="message-name">Johnny</span>
+            <span class="message-date">Monday</span>
+          </div>
+          <div class="message-preview">
+            jangan lupa dateng nanti malam.
+          </div>
+        </div>
+        <span class="message-unread"></span>
+      </div>
+
+      <div class="message-row" onclick="openChat('mark')">
+        <div class="message-avatar">H</div>
+        <div class="message-info">
+          <div class="message-name-line">
+            <span class="message-name">Haechan</span>
+            <span class="message-date">Sunday</span>
+          </div>
+          <div class="message-preview">
+            lo udah di rumah?
+          </div>
+        </div>
+        <span class="message-unread"></span>
+      </div>
+
+      <div class="messages-bottom">
+        <div class="messages-search">⌕ &nbsp; Search</div>
+        <button class="new-message"
+          onclick="alert('New Message')">✎</button>
+      </div>
+    </div>`;
 
 
 } else if (name === "Notes") {
