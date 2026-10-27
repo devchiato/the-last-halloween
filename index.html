@@ -439,7 +439,7 @@ body {
 }
 
 .icon.music {
-  background: linear-gradient(145deg,#ff657d,#ed174d);
+  background: linear-gradient(145deg, #ff648c, #e90046);
 }
 
 .icon.camera {
@@ -683,14 +683,38 @@ body {
       </button>
 
       <!-- MUSIC -->
-      <button class="app" data-app="Apple Music">
-        <span class="icon music">
-          <svg viewBox="0 0 100 100">
-            <path d="M59 20v49a12 12 0 1 1-9-12V32l31-8v36a12 12 0 1 1-9-12V18z" fill="#fff"/>
-          </svg>
-        </span>
-        <span class="app-name">Music</span>
-      </button>
+<button class="app" data-app="Apple Music">
+  <span class="icon music">
+    <svg viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="musicGradient"
+          x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ff648c"/>
+          <stop offset="100%" stop-color="#e90046"/>
+        </linearGradient>
+      </defs>
+
+      <rect width="100" height="100" rx="18"
+        fill="url(#musicGradient)"/>
+
+      <path
+        d="M63 19v48
+           c0 9-7 15-15 15
+           c-7 0-12-4-12-10
+           c0-7 6-12 14-12
+           c3 0 5 1 7 2V31
+           l25-6v35
+           c0 9-7 15-15 15
+           c-7 0-12-4-12-10
+           c0-7 6-12 14-12
+           c2 0 4 1 6 2V19z"
+        fill="#fff"
+        transform="translate(-3 0)"/>
+    </svg>
+  </span>
+
+  <span class="app-name">Music</span>
+</button>
 
       <!-- GMAIL -->
       <button class="app" data-app="Gmail">
