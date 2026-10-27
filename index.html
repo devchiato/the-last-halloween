@@ -1404,6 +1404,130 @@ function openApp(name) {
   }
 }
 
+const noteData = {
+  today: {
+    title: "Halloween Party🎃",
+    date: "October 31, 7:00 PM",
+    body: `Oct 31
+
+Ke rumah Bang Johnny jam 21.00.
+Jangan lupa bawa barang-barang buat Halloween party.
+
+Things to bring:
+• Costume
+• Snacks
+• Camera
+
+Don't be late.`
+  },
+
+  note1: {
+    title: "BANG YUTA ULTAH",
+    date: "October 26",
+    body: `hari ini bang yuta ultah 😭
+
+dia pengen dibeliin ikan....
+
+harus cari kado yang cocok dulu.
+jangan sampai lupa ngucapin pas ketemu nanti.`
+  },
+
+  note2: {
+    title: "things he does (ongoing list)",
+    date: "October 23",
+    body: `- says "ohhh" when he finally understands something
+- smiles before he even finishes his joke
+- acts like he doesn't care, but remembers tiny details
+- gets excited over the smallest things
+
+(ongoing list...)`
+  },
+
+  note3: {
+    title: "slow brew",
+    date: "October 21",
+    body: `corner seat
+
+he got there first and saved it for me.
+
+ordered the usual.
+same table, same drinks, same afternoon light.
+
+somehow, it's becoming a habit.`
+  },
+
+  note4: {
+    title: "kelompok 3 (unfortunately)",
+    date: "October 20",
+    body: `anjing ya si kampret numpang nama doang tai 😭
+
+kerjaan dibagi dari awal tapi yang ngerjain orang itu-itu lagi.
+
+todo:
+- [ ] beresin slide
+- [ ] cek tugas
+- [ ] jangan emosi dulu`
+  }
+};
+
+function openNote(id) {
+  const note = noteData[id];
+
+  if (!note) return;
+
+  const safeTitle = note.title
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  const safeBody = note.body
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  appContent.innerHTML = `
+    <div class="notes-screen">
+      <div class="notes-topbar">
+        <button class="back"
+          onclick="openApp('Notes')">
+          ‹ Notes
+        </button>
+        <span style="color:#ff9f0a;font-size:14px">
+          Done
+        </span>
+      </div>
+
+      <div style="
+        color:#8e8e93;
+        font-size:12px;
+        text-align:center;
+        margin:20px 0 24px;
+      ">
+        ${note.date}
+      </div>
+
+      <h1 style="
+        font-size:28px;
+        line-height:1.2;
+        font-weight:700;
+        letter-spacing:-.5px;
+        margin:0 0 16px;
+        color:#000;
+      ">${safeTitle}</h1>
+
+      <div style="
+        color:#1c1c1e;
+        font-size:17px;
+        line-height:1.5;
+        white-space:pre-wrap;
+        overflow-wrap:anywhere;
+      ">${safeBody}</div>
+    </div>
+  `;
+
+  appPage.classList.remove("dark");
+  appPage.scrollTop = 0;
+}
 function openChat(which) {
   document.getElementById("appTitle").textContent =
     which === "mark" ? "Mark Lee" : "TONGKRONGAN ASIK";
