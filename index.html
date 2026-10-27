@@ -1230,26 +1230,19 @@ function openApp(name) {
       </div>`;
  
 
+
 } else if (name === "Notes") {
   appContent.innerHTML = `
     <div class="notes-screen">
 
-    <span class="status-time">19:00</span>
-
-    <div class="status-icons">
-      <svg class="signal-icon" viewBox="0 0 18 14" aria-label="Sinyal">
-        <path d="M1 13V10H4V13Z" fill="currentColor"/>
-        <path d="M5 13V7H8V13Z" fill="currentColor"/>
-        <path d="M9 13V4H12V13Z" fill="currentColor"/>
-        <path d="M13 13V1H16V13Z" fill="currentColor"/>
-      </svg>
-
-      <span class="network">5G</span>
-
-      <div class="battery" aria-label="Baterai 75 persen">
-        <span class="battery-level"></span>
-        <span class="battery-cap"></span>
-    </div>
+      <div class="notes-status">
+        <span>20:46</span>
+        <div class="notes-status-right">
+          <span class="notes-signal">▮▮▮</span>
+          <span>5G</span>
+          <span class="notes-battery"></span>
+        </div>
+      </div>
 
       <div class="notes-topbar">
         <button class="notes-circle notes-back"
@@ -1287,7 +1280,7 @@ function openApp(name) {
       </section>
 
       <section class="notes-section previous-notes">
-        <h4>Previous 7 Days</h4>
+        <h4>Previous 30 Days</h4>
 
         <div class="notes-card">
 
@@ -1372,7 +1365,7 @@ function openApp(name) {
 
     </div>
   `;
-  } else if (name === "Reminders") {
+} else if (name === "Reminders") {
     appContent.innerHTML =
       "<p>◯ Jemput Haechan</p><p>◯ Halloween party</p>";
   } else if (name === "Gmail") {
