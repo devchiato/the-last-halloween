@@ -2047,12 +2047,21 @@ function playIMessageSound() {
   }
 }
 
+
 function showGroupNotification() {
   const notification = document.getElementById("groupNotification");
   if (!notification) return;
 
   notification.classList.remove("hidden");
-  playIMessageSound();
+
+  const unlockAudio = () => {
+    playIMessageSound();
+    document.removeEventListener("click", unlockAudio);
+    document.removeEventListener("touchstart", unlockAudio);
+  };
+
+  document.addEventListener("click", unlockAudio);
+  document.addEventListener("touchstart", unlockAudio, { passive: true });
 }
 
 
