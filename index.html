@@ -99,7 +99,7 @@ body {
 
 .island {
   position: absolute;
-  z-index: 6;
+  z-index: 20;
   width: 105px;
   height: 30px;
   top: 10px;
@@ -107,8 +107,9 @@ body {
   transform: translateX(-50%);
   background: #050505;
   border-radius: 20px;
+  pointer-events: none;
 }
-
+  
 .lock {
   position: absolute;
   inset: 0;
@@ -763,11 +764,19 @@ body {
   box-shadow: 0 2px 12px #00000008;
 }
 
+/* STATUS BAR UTAMA: LOCK SCREEN & HOME SCREEN */
+.phone > .status {
+  display: flex;
+  color: white;
+  z-index: 19;
+}
+
+/* Sembunyikan status bar utama hanya ketika Notes dibuka */
 .phone:has(.notes-screen) > .status {
   display: none;
 }
 
-/* STATUS BAR NOTES */
+/* STATUS BAR KHUSUS NOTES */
 .notes-screen > .status {
   position: absolute;
   top: 13px;
@@ -779,7 +788,7 @@ body {
   font-size: 15px;
   font-weight: 600;
   color: #000;
-  z-index: 20;
+  z-index: 19;
 }
 
 .notes-screen > .status .signal-icon {
@@ -797,25 +806,13 @@ body {
 .notes-screen > .status .battery-cap {
   background: #000;
 }
-  
-/* FIX STATUS BAR HOME SCREEN */
-.phone > .status {
-  display: flex;
-  color: white;
-  z-index: 10;
-}
 
-/* Status bar utama disembunyikan hanya saat Notes terbuka */
-.phone:has(.notes-screen) > .status {
-  display: none;
-}
-
-/* Status bar di Notes tetap hitam */
-.notes-screen > .status {
-  display: flex;
-  color: black;
+/* DYNAMIC ISLAND TETAP DI ATAS SEMUA LAYAR */
+.island {
   z-index: 20;
+  pointer-events: none;
 }
+
 </style>
 </head>
 
