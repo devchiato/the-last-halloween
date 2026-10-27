@@ -1330,6 +1330,19 @@ body {
   .reminders-add {
     right: 23px;
   }
+  .x-icon {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 42px;
+  font-weight: 400;
+  border-radius: 22%;
+}
+  .x-app {
+  background: #000;
+}
 }
 </style>
 </head>
@@ -1566,6 +1579,20 @@ body {
         <span class="app-name">Instagram</span>
       </button>
     </div>
+
+    
+<!-- X -->
+<button class="app" data-app="X">
+  <span class="icon x-app">
+    <svg viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#000"/>
+      <path d="M25 22 H39 L75 78 H61 Z" fill="#fff"/>
+      <path d="M73 22 H84 L38 78 H27 Z" fill="#fff"/>
+    </svg>
+  </span>
+  <span class="app-name">X</span>
+</button>
+
 
     <!-- DOCK -->
     <div class="dock">
