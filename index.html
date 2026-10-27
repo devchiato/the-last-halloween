@@ -563,6 +563,106 @@ body {
     border-radius: 45px;
   }
 }
+
+/* APPLE NOTES LIST */
+
+.app-page:has(.notes-screen) {
+  background: #f2f2f7;
+  color: #111;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.app-page:has(.notes-screen) .app-header {
+  display: none;
+}
+
+.notes-screen {
+  min-height: 100%;
+  padding: 58px 20px 90px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+}
+
+.notes-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notes-folder,
+.notes-more {
+  background: none;
+  border: none;
+  color: #ff9f0a;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.notes-title {
+  font-size: 34px;
+  font-weight: 700;
+  margin: 22px 0 18px;
+  letter-spacing: -1px;
+}
+
+.notes-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: #e3e3e8;
+  color: #8e8e93;
+  font-size: 15px;
+  margin-bottom: 27px;
+}
+
+.notes-section h4 {
+  color: #8e8e93;
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0 0 10px;
+}
+
+.note-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #d1d1d6;
+  cursor: pointer;
+}
+
+.note-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.note-meta,
+.note-preview {
+  font-size: 13px;
+  color: #8e8e93;
+  margin-top: 3px;
+}
+
+.previous-notes {
+  margin-top: 27px;
+}
+
+.notes-compose {
+  position: fixed;
+  bottom: 42px;
+  right: max(calc((100% - 390px) / 2 + 22px), 22px);
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: #f2f2f7;
+  color: #ff9f0a;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 10;
+}
 </style>
 </head>
 
@@ -977,9 +1077,70 @@ function openApp(name) {
         <b>TONGKRONGAN ASIK</b>
         <div class="preview">Bang Doyoung: bentarrrrr</div>
       </div>`;
-  } else if (name === "Notes") {
-    appContent.innerHTML =
-      "<h3>Halloween 🎃</h3><p>31 October · 19:00</p><p>Ke rumah Johnny</p>";
+ 
+} else if (name === "Notes") {
+  appContent.innerHTML = `
+    <div class="notes-screen">
+
+      <div class="notes-topbar">
+        <button class="notes-folder">‹ Folders</button>
+        <button class="notes-more">•••</button>
+      </div>
+
+      <h1 class="notes-title">Notes</h1>
+
+      <div class="notes-search">
+        <span>⌕</span>
+        <span>Search</span>
+      </div>
+
+      <div class="notes-section">
+        <h4>Today</h4>
+
+        <div class="note-item" onclick="openNote('today')">
+          <div class="note-title">Halloween 🎃</div>
+          <div class="note-meta">7:00 PM</div>
+          <div class="note-preview">
+            31 October · Ke rumah Johnny...
+          </div>
+        </div>
+      </div>
+
+      <div class="notes-section previous-notes">
+        <h4>Previous 30 Days</h4>
+
+        <div class="note-item" onclick="openNote('note1')">
+          <div class="note-title">Untitled</div>
+          <div class="note-meta">Oct 29</div>
+          <div class="note-preview">...</div>
+        </div>
+
+        <div class="note-item" onclick="openNote('note2')">
+          <div class="note-title">Untitled</div>
+          <div class="note-meta">Oct 27</div>
+          <div class="note-preview">...</div>
+        </div>
+
+        <div class="note-item" onclick="openNote('note3')">
+          <div class="note-title">Untitled</div>
+          <div class="note-meta">Oct 25</div>
+          <div class="note-preview">...</div>
+        </div>
+
+        <div class="note-item" onclick="openNote('note4')">
+          <div class="note-title">Untitled</div>
+          <div class="note-meta">Oct 23</div>
+          <div class="note-preview">...</div>
+        </div>
+      </div>
+
+      <button class="notes-compose"
+        onclick="openNote('new')">✎</button>
+
+    </div>
+  `;
+}
+
   } else if (name === "Reminders") {
     appContent.innerHTML =
       "<p>◯ Jemput Haechan</p><p>◯ Halloween party</p>";
