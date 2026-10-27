@@ -591,62 +591,10 @@ body {
 .notes-screen {
   position: relative;
   min-height: 100%;
-  padding: 12px 20px 100px;
+  padding: 55px 20px 100px;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   color: #000;
   -webkit-font-smoothing: antialiased;
-}
-
-/* STATUS BAR */
-
-.notes-status {
-  height: 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 7px;
-  font-size: 15px;
-  font-weight: 650;
-}
-
-.notes-status-right {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-}
-
-.notes-signal {
-  letter-spacing: -3px;
-  font-size: 17px;
-}
-
-.notes-battery {
-  width: 24px;
-  height: 12px;
-  border: 1.5px solid #000;
-  border-radius: 4px;
-  padding: 1px;
-  position: relative;
-}
-
-.notes-battery::before {
-  content: "";
-  display: block;
-  width: 74%;
-  height: 100%;
-  background: #000;
-  border-radius: 2px;
-}
-
-.notes-battery::after {
-  content: "";
-  position: absolute;
-  right: -3px;
-  top: 3px;
-  width: 2px;
-  height: 4px;
-  background: #000;
 }
 
 /* TOP BUTTONS */
@@ -814,6 +762,12 @@ body {
   cursor: pointer;
   box-shadow: 0 2px 12px #00000008;
 }
+
+  
+.phone:has(.notes-screen) > .status {
+  color: #000;
+}
+
 </style>
 </head>
 
@@ -1235,14 +1189,25 @@ function openApp(name) {
   appContent.innerHTML = `
     <div class="notes-screen">
 
-      <div class="notes-status">
-        <span>20:46</span>
-        <div class="notes-status-right">
-          <span class="notes-signal">▮▮▮</span>
-          <span>5G</span>
-          <span class="notes-battery"></span>
-        </div>
-      </div>
+      <div class="status">
+  <span class="status-time">19:00</span>
+
+  <div class="status-icons">
+    <svg class="signal-icon" viewBox="0 0 18 14" aria-label="Sinyal">
+      <path d="M1 13V10H4V13Z" fill="currentColor"/>
+      <path d="M5 13V7H8V13Z" fill="currentColor"/>
+      <path d="M9 13V4H12V13Z" fill="currentColor"/>
+      <path d="M13 13V1H16V13Z" fill="currentColor"/>
+    </svg>
+
+    <span class="network">5G</span>
+
+    <div class="battery" aria-label="Baterai 75 persen">
+      <span class="battery-level"></span>
+      <span class="battery-cap"></span>
+    </div>
+  </div>
+</div>
 
       <div class="notes-topbar">
         <button class="notes-circle notes-back"
