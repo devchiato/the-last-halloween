@@ -763,36 +763,39 @@ body {
   box-shadow: 0 2px 12px #00000008;
 }
 
-  
 .phone:has(.notes-screen) > .status {
-  color: #000;
+  display: none;
 }
 
-
-/* STATUS BAR KHUSUS NOTES */
+/* STATUS BAR NOTES */
 .notes-screen > .status {
   position: absolute;
-  top: -42px;
+  top: 13px;
   left: 28px;
   right: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
   color: #000;
   z-index: 20;
 }
 
+.notes-screen > .status .signal-icon {
+  color: #000;
+}
+
 .notes-screen > .status .battery {
-  border-color: #000 !important;
+  border-color: #000;
 }
 
 .notes-screen > .status .battery-level {
-  background: #000 !important;
+  background: #000;
 }
 
 .notes-screen > .status .battery-cap {
-  background: #000 !important;
-}
-
-.notes-screen > .status .signal-icon {
-  color: #000;
+  background: #000;
 }
 </style>
 </head>
