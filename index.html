@@ -813,6 +813,143 @@ body {
   pointer-events: none;
 }
 
+/* iOS Notes detail */
+.notes-detail {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  padding: 112px 24px 110px;
+  background: #fff;
+  color: #383838;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    Arial, sans-serif;
+}
+
+.notes-detail .notes-actions {
+  position: absolute;
+  top: 20px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notes-detail .notes-circle,
+.notes-detail .notes-pill,
+.notes-detail .notes-bottom-button {
+  border: 0;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 5px 24px rgba(0, 0, 0, 0.055);
+  color: #171717;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.notes-detail .notes-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  font-size: 36px;
+}
+
+.notes-detail .notes-pill {
+  height: 58px;
+  padding: 0 22px;
+  gap: 24px;
+  border-radius: 32px;
+  font-size: 29px;
+}
+
+.notes-detail .notes-date {
+  margin: 0 0 48px;
+  color: #454545;
+  font-size: 37px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+}
+
+.notes-detail .notes-body {
+  font-size: 23px;
+  line-height: 1.52;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.notes-detail .notes-bottom {
+  position: fixed;
+  left: 22px;
+  right: 22px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.notes-detail .notes-tools {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 15px 21px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.07);
+}
+
+.notes-detail .notes-tool {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #171717;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.notes-detail .notes-bottom-button {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  font-size: 29px;
+  pointer-events: auto;
+}
+
+.notes-detail .notes-tools button {
+  pointer-events: auto;
+}
+
+.notes-detail button:active {
+  opacity: 0.6;
+}
+
+@media (max-width: 400px) {
+  .notes-detail {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .notes-detail .notes-date {
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+
+  .notes-detail .notes-body {
+    font-size: 20px;
+  }
+
+  .notes-detail .notes-tools {
+    gap: 17px;
+    padding: 13px 16px;
+  }
+
+  .notes-detail .notes-tool {
+    font-size: 26px;
+  }
 </style>
 </head>
 
@@ -858,7 +995,7 @@ body {
   <!-- PASSCODE -->
   <section class="screen passcode hidden" id="pass">
     <div>
-      <div style="font-size:30px"</div>
+      <div style="font-size:30px"></div>
       <div class="pass-title">Enter Passcode</div>
 
       <div class="dots">
@@ -1470,89 +1607,64 @@ todo:
   }
 };
 
+
 function openNote(id) {
   const note = noteData[id];
-
   if (!note) return;
 
-  const safeTitle = note.title
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+  const escapeHTML = (value) =>
+    String(value).replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
 
-  const safeBody = note.body
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+  const body = Array.isArray(note.body)
+    ? note.body.map((line, index) => `${index + 1}.  ${line}`).join("\n")
+    : note.body;
 
- 
-appContent.innerHTML = `
-    <div class="notes-screen">
+  appContent.innerHTML = `
+    <div class="notes-detail">
+      <div class="notes-actions">
+        <button class="notes-circle"
+          onclick="openApp('Notes'); appPage.scrollTop = 0"
+          aria-label="Back">‹</button>
 
-      <!-- STATUS BAR: SAMA SEPERTI NOTES AWAL -->
-      <div class="status">
-        <span class="status-time">19:00</span>
-
-        <div class="status-icons">
-          <svg class="signal-icon" viewBox="0 0 18 14" aria-label="Sinyal">
-            <path d="M1 13V10H4V13Z" fill="currentColor"/>
-            <path d="M5 13V7H8V13Z" fill="currentColor"/>
-            <path d="M9 13V4H12V13Z" fill="currentColor"/>
-            <path d="M13 13V1H16V13Z" fill="currentColor"/>
-          </svg>
-
-          <span class="network">5G</span>
-
-          <div class="battery" aria-label="Baterai 75 persen">
-            <span class="battery-level"></span>
-            <span class="battery-cap"></span>
-          </div>
+        <div class="notes-pill">
+          <button class="notes-tool" aria-label="Share"
+            onclick="alert('Share')">⇧</button>
+          <button class="notes-tool" aria-label="More options"
+            onclick="alert('More options')">•••</button>
         </div>
       </div>
 
-      <!-- HEADER DAN ISI NOTE TETAP DI BAWAH -->
-      <div class="notes-topbar">
+      <h1 class="notes-date">${escapeHTML(note.date || "Oct, 7th 2026")}</h1>
 
-        <button class="back"
-          onclick="openApp('Notes')">
-          ‹ Notes
-        </button>
-        <span style="color:#ff9f0a;font-size:14px">
-          Done
-        </span>
+      <div class="notes-body">${escapeHTML(body).replace(/\n/g, "<br>")}</div>
+
+      <div class="notes-bottom">
+        <div class="notes-tools">
+          <button class="notes-tool" aria-label="Checklist"
+            onclick="alert('Checklist')">☷</button>
+          <button class="notes-tool" aria-label="Attachment"
+            onclick="alert('Attachment')">♧</button>
+          <button class="notes-tool" aria-label="Markup"
+            onclick="alert('Markup')">Ⓐ</button>
+          <button class="notes-tool" aria-label="Drawing"
+            onclick="alert('Drawing')">✎</button>
+        </div>
+
+        <button class="notes-bottom-button" aria-label="New note"
+          onclick="openNote('new')">□</button>
       </div>
-
-      <div style="
-        color:#8e8e93;
-        font-size:12px;
-        text-align:center;
-        margin:20px 0 24px;
-      ">
-        ${note.date}
-      </div>
-
-      <h1 style="
-        font-size:28px;
-        line-height:1.2;
-        font-weight:700;
-        letter-spacing:-.5px;
-        margin:0 0 16px;
-        color:#000;
-      ">${safeTitle}</h1>
-
-      <div style="
-        color:#1c1c1e;
-        font-size:17px;
-        line-height:1.5;
-        white-space:pre-wrap;
-        overflow-wrap:anywhere;
-      ">${safeBody}</div>
     </div>
   `;
 
-  appPage.classList.remove("dark");
   appPage.scrollTop = 0;
 }
+
 function openChat(which) {
   document.getElementById("appTitle").textContent =
     which === "mark" ? "Mark Lee" : "TONGKRONGAN ASIK";
