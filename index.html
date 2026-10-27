@@ -1476,6 +1476,79 @@ body {
   width: 100%;
   height: 100%;
 }
+/* CHAT LIST */
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e5e5ea;
+  cursor: pointer;
+  color: #111;
+}
+
+.chat-avatar {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+}
+
+.mark-avatar {
+  background: #78a9dc;
+}
+
+.group-avatar {
+  background: #a7a7ad;
+  font-size: 23px;
+}
+
+.mama-avatar {
+  background: #e6a2b5;
+}
+
+.chat-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.chat-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.chat-preview {
+  font-size: 14px;
+  color: #8e8e93;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.chat-members {
+  font-size: 11px;
+  color: #8e8e93;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.chat-arrow {
+  color: #c7c7cc;
+  font-size: 24px;
+  padding-left: 4px;
+}
 }
 </style>
 </head>
@@ -1894,70 +1967,57 @@ function openApp(name) {
   document.getElementById("appTitle").textContent = name;
   appContent.innerHTML = "";
 
-  
+
 if (name === "Messages") {
   appContent.innerHTML = `
     <div class="messages-screen">
+
       <div class="messages-top">
         <button onclick="goHome()">‹ Back</button>
         <h2>Messages</h2>
         <button onclick="alert('Edit Messages')">Edit</button>
       </div>
 
-      <div class="message-row" onclick="openChat('mark')">
-        <div class="message-avatar">M</div>
-        <div class="message-info">
-          <div class="message-name-line">
-            <span class="message-name">Mark Lee</span>
-            <span class="message-date">Yesterday</span>
-          </div>
-          <div class="message-preview">
-            bentar ya abis ini otw jemput
-          </div>
-        </div>
-        <span style="color:#bbb">›</span>
-      </div>
+      <div class="chat-list">
 
-      <div class="message-row" onclick="openChat('group')">
-        <div class="message-avatar">T</div>
-        <div class="message-info">
-          <div class="message-name-line">
-            <span class="message-name">TONGKRONGAN ASIK</span>
-            <span class="message-date">Wednesday</span>
+        <!-- CHAT 1: MARK -->
+        <div class="chat-item" onclick="openChat('Mark')">
+          <div class="chat-avatar mark-avatar">M</div>
+          <div class="chat-info">
+            <div class="chat-name">Mark</div>
+            <div class="chat-preview">wait</div>
           </div>
-          <div class="message-preview">
-            Bang Doyoung: bentarrrrr
-          </div>
+          <div class="chat-arrow">›</div>
         </div>
-        <span style="color:#bbb">›</span>
-      </div>
 
-      <div class="message-row" onclick="openChat('mark')">
-        <div class="message-avatar">J</div>
-        <div class="message-info">
-          <div class="message-name-line">
-            <span class="message-name">Johnny</span>
-            <span class="message-date">Monday</span>
+        <!-- CHAT 2: WARGA BERMASALAH -->
+        <div class="chat-item" onclick="openChat('Warga Bermasalah')">
+          <div class="chat-avatar group-avatar">👥</div>
+          <div class="chat-info">
+            <div class="chat-name">Warga Bermasalah</div>
+            <div class="chat-preview">
+              <b>Jungwoo:</b> bawa amer dong
+            </div>
+            <div class="chat-members">
+              Mark, Haechan, Johnny, Yuta, Taeyong,
+              Doyoung, Jungwoo, Jaehyun
+            </div>
           </div>
-          <div class="message-preview">
-            jangan lupa dateng nanti malam.
-          </div>
+          <div class="chat-arrow">›</div>
         </div>
-        <span class="message-unread"></span>
-      </div>
 
-      <div class="message-row" onclick="openChat('mark')">
-        <div class="message-avatar">H</div>
-        <div class="message-info">
-          <div class="message-name-line">
-            <span class="message-name">Haechan</span>
-            <span class="message-date">Sunday</span>
+        <!-- CHAT 3: MAMA -->
+        <div class="chat-item" onclick="openChat('Mama')">
+          <div class="chat-avatar mama-avatar">M</div>
+          <div class="chat-info">
+            <div class="chat-name">Mama</div>
+            <div class="chat-preview">
+              sehat-sehat disana ya, le
+            </div>
           </div>
-          <div class="message-preview">
-            lo udah di rumah?
-          </div>
+          <div class="chat-arrow">›</div>
         </div>
-        <span class="message-unread"></span>
+
       </div>
 
       <div class="messages-bottom">
@@ -1965,7 +2025,9 @@ if (name === "Messages") {
         <button class="new-message"
           onclick="alert('New Message')">✎</button>
       </div>
-    </div>`;
+
+    </div>
+  `;
 
 
 } else if (name === "Notes") {
