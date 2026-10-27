@@ -1557,6 +1557,87 @@ body {
   font-size: 24px;
   padding-left: 4px;
 }
+  
+/* NOTIFIKASI IMESSAGE DI HOMESCREEN */
+.home-imessage-notification {
+  position: absolute;
+  top: 55px;
+  left: 12px;
+  right: 12px;
+  z-index: 18;
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 13px;
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: 21px;
+  background: rgba(245, 245, 250, .88);
+  color: #171719;
+  box-shadow: 0 5px 20px #0003;
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  animation: imessageNotificationIn .4s ease-out;
+}
+
+.home-imessage-notification-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: #32c759;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.home-imessage-notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-imessage-notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.home-imessage-notification-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+.home-imessage-notification-time {
+  flex-shrink: 0;
+  color: #77777d;
+  font-size: 11px;
+}
+
+.home-imessage-notification-sender {
+  font-size: 14px;
+  font-weight: 650;
+  margin-bottom: 2px;
+}
+
+.home-imessage-notification-message {
+  font-size: 14px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+@keyframes imessageNotificationIn {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
 </head>
@@ -1635,6 +1716,26 @@ body {
 
   <!-- HOME SCREEN -->
   <section class="screen home hidden" id="home">
+    
+<div class="home-imessage-notification hidden" id="groupNotification">
+  <div class="home-imessage-notification-icon">●</div>
+
+  <div class="home-imessage-notification-content">
+    <div class="home-imessage-notification-header">
+      <span class="home-imessage-notification-title">
+        WARGA BERMASALAH
+      </span>
+      <span class="home-imessage-notification-time">sekarang</span>
+    </div>
+
+    <div class="home-imessage-notification-sender">Doyoung</div>
+
+    <div class="home-imessage-notification-message">
+      woo, lu gue geprek ya
+    </div>
+  </div>
+</div>
+
     <div class="home-widgets">
       <div class="weather-widget">
         <div class="widget-city">Jakarta</div>
@@ -1901,6 +2002,64 @@ const pass = document.getElementById("pass");
 const home = document.getElementById("home");
 const appPage = document.getElementById("appPage");
 let code = "";
+  
+function playIMessageSound() {
+  try {
+    const AudioContextClass =
+      window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioContextClass) return;
+
+    const audioContext = new AudioContextClass();
+
+    audioContext.resume().then(() => {
+      const notes = [
+        { frequency: 880, start: 0 },
+        { frequency: 1175, start: 0.13 }
+      ];
+
+      notes.forEach(note => {
+        const oscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+
+        oscillator.type = "sine";
+        oscillator.frequency.value = note.frequency;
+
+        gain.gain.setValueAtTime(
+          0.0001,
+          audioContext.currentTime + note.start
+        );
+        gain.gain.exponentialRampToValueAtTime(
+          0.18,
+          audioContext.currentTime + note.start + 0.015
+        );
+        gain.gain.exponentialRampToValueAtTime(
+          0.0001,
+          audioContext.currentTime + note.start + 0.22
+        );
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        oscillator.start(audioContext.currentTime + note.start);
+        oscillator.stop(audioContext.currentTime + note.start + 0.23);
+      });
+
+      setTimeout(() => audioContext.close(), 1000);
+    }).catch(() => {});
+  } catch (error) {
+    // Audio tidak tersedia di browser ini.
+  }
+}
+
+function showGroupNotification() {
+  const notification = document.getElementById("groupNotification");
+  if (!notification) return;
+
+  notification.classList.remove("hidden");
+  playIMessageSound();
+}
+
 
 function openPasscode() {
   lock.classList.add("hidden");
@@ -1939,6 +2098,7 @@ document.querySelectorAll("[data-num]").forEach(button => {
         setTimeout(() => {
           pass.classList.add("hidden");
           home.classList.remove("hidden");
+          showGroupNotification();
         }, 200);
       } else {
         document.getElementById("error").textContent =
