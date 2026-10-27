@@ -814,117 +814,97 @@ body {
 }
 
 /* iOS Notes detail */
+
 .notes-detail {
   position: relative;
   box-sizing: border-box;
   width: 100%;
   min-height: 100%;
-  padding: 112px 24px 110px;
+  padding: 88px 22px 100px;
   background: #fff;
   color: #383838;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-    Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 }
 
 .notes-detail .notes-actions {
   position: absolute;
-  top: 20px;
-  left: 18px;
-  right: 18px;
+  top: 13px;
+  left: 22px;
+  right: 22px;
   display: flex;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: space-between;
-}
-
-.notes-detail .notes-circle,
-.notes-detail .notes-pill,
-.notes-detail .notes-bottom-button {
-  border: 0;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 5px 24px rgba(0, 0, 0, 0.055);
-  color: #171717;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.notes-detail .notes-circle {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  font-size: 36px;
 }
 
 .notes-detail .notes-pill {
-  height: 58px;
-  padding: 0 22px;
-  gap: 24px;
-  border-radius: 32px;
-  font-size: 29px;
-}
-
-.notes-detail .notes-date {
-  margin: 0 0 48px;
-  color: #454545;
-  font-size: 37px;
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.8px;
-}
-
-.notes-detail .notes-body {
-  font-size: 23px;
-  line-height: 1.52;
-  font-weight: 400;
-  overflow-wrap: anywhere;
-  white-space: pre-wrap;
-}
-
-.notes-detail .notes-bottom {
-  position: fixed;
-  left: 22px;
-  right: 22px;
-  bottom: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  pointer-events: none;
-}
-
-.notes-detail .notes-tools {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  padding: 15px 21px;
-  border-radius: 40px;
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.07);
+  gap: 20px;
+  padding: 8px 15px;
+  border-radius: 24px;
+  background: #f5f5f7;
+  border: 0;
+  color: #222;
+  font-size: 22px;
 }
 
 .notes-detail .notes-tool {
   border: 0;
   padding: 0;
   background: transparent;
-  color: #171717;
-  font-size: 30px;
+  color: #222;
+  font-size: 22px;
   cursor: pointer;
 }
 
-.notes-detail .notes-bottom-button {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  font-size: 29px;
-  pointer-events: auto;
+.notes-detail .notes-date {
+  margin: 0 0 22px;
+  color: #88888e;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
-.notes-detail .notes-tools button {
-  pointer-events: auto;
+.notes-detail .notes-body {
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.notes-detail .notes-bottom {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notes-detail .notes-tools {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 10px 15px;
+  border-radius: 25px;
+  background: #f5f5f7;
+}
+
+.notes-detail .notes-bottom-button {
+  width: 45px;
+  height: 45px;
+  border: 0;
+  border-radius: 50%;
+  background: #f5f5f7;
+  color: #222;
+  font-size: 23px;
 }
 
 .notes-detail button:active {
-  opacity: 0.6;
+  opacity: .6;
 }
 
 @media (max-width: 400px) {
@@ -933,13 +913,17 @@ body {
     padding-right: 20px;
   }
 
-  .notes-detail .notes-date {
-    font-size: 32px;
-    margin-bottom: 40px;
+  .notes-detail .notes-tools {
+    gap: 13px;
+    padding: 9px 12px;
   }
 
-  .notes-detail .notes-body {
+  .notes-detail .notes-tool {
     font-size: 20px;
+  }
+  .notes-detail {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .notes-detail .notes-tools {
@@ -950,6 +934,23 @@ body {
   .notes-detail .notes-tool {
     font-size: 26px;
   }
+}
+  
+/* Hilangkan header aplikasi saat membuka detail Notes */
+.app-page:has(.notes-detail) {
+  padding: 0;
+  background: #fff;
+  overflow-y: auto;
+  color: #111;
+}
+
+.app-page:has(.notes-detail) .app-header {
+  display: none;
+}
+
+.app-page:has(.notes-detail) .notes-detail {
+  background: #fff;
+}
 </style>
 </head>
 
@@ -1628,9 +1629,6 @@ function openNote(id) {
   appContent.innerHTML = `
     <div class="notes-detail">
       <div class="notes-actions">
-        <button class="notes-circle"
-          onclick="openApp('Notes'); appPage.scrollTop = 0"
-          aria-label="Back">‹</button>
 
         <div class="notes-pill">
           <button class="notes-tool" aria-label="Share"
