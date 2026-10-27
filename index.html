@@ -1506,6 +1506,13 @@ body {
   font-weight: 600;
   color: white;
 }
+.chat-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
 
 .mark-avatar {
   background: #78a9dc;
@@ -1983,7 +1990,9 @@ if (name === "Messages") {
 
         <!-- CHAT 1: MARK -->
         <div class="chat-item" onclick="openChat('Mark')">
-          <div class="chat-avatar mark-avatar">M</div>
+          <div class="chat-avatar mark-avatar">
+  <img src="mark.jfif" alt="Mark">
+</div>
           <div class="chat-info">
             <div class="chat-name">Mark</div>
             <div class="chat-preview">wait</div>
