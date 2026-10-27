@@ -768,21 +768,31 @@ body {
   color: #000;
 }
 
-/* Status bar hitam khusus di Notes */
-.phone:has(.notes-screen) > .status {
+
+/* STATUS BAR KHUSUS NOTES */
+.notes-screen > .status {
+  position: absolute;
+  top: -42px;
+  left: 28px;
+  right: 28px;
   color: #000;
+  z-index: 20;
 }
 
-.phone:has(.notes-screen) > .status .battery {
-  border-color: #000;
+.notes-screen > .status .battery {
+  border-color: #000 !important;
 }
 
-.phone:has(.notes-screen) > .status .battery-level {
-  background: #000;
+.notes-screen > .status .battery-level {
+  background: #000 !important;
 }
 
-.phone:has(.notes-screen) > .status .battery-cap {
-  background: #000;
+.notes-screen > .status .battery-cap {
+  background: #000 !important;
+}
+
+.notes-screen > .status .signal-icon {
+  color: #000;
 }
 </style>
 </head>
