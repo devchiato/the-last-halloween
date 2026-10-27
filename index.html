@@ -849,7 +849,20 @@ body {
   color: #383838;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 }
+.notes-detail .notes-heading {
+  margin-bottom: 12px;
+  font-size: 23px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: #222;
+}
 
+.notes-detail .notes-text {
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
 /* Tombol back, share, dan titik tiga */
 .notes-detail .notes-actions {
   position: absolute;
@@ -890,11 +903,21 @@ body {
 
 /* Tanggal dan isi catatan */
 .notes-detail .notes-date {
-  margin: 0 0 22px;
+  margin: 0 0 36px;
   color: #88888e;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.4;
-  font-weight: 500;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* JUDUL CATATAN */
+.notes-detail .notes-body {
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
 }
 
 .notes-detail .notes-body {
@@ -1644,7 +1667,7 @@ function openApp(name) {
 const noteData = {
   today: {
     title: "Halloween Party🎃",
-    date: "October 31, 7:00 PM",
+    date: "October 31st, 2026 at 07.00 PM",
     body: `Halloween Party🎃
 
 Ke rumah Bang Johnny jam 21.00.
@@ -1763,7 +1786,10 @@ function openNote(id) {
 
       <h1 class="notes-date">${escapeHTML(note.date || "Oct, 7th 2026")}</h1>
 
-      <div class="notes-body">${escapeHTML(body).replace(/\n/g, "<br>")}</div>
+     <div class="notes-body">
+  <div class="notes-heading">${escapeHTML(body.split("\n")[0])}</div>
+  <div class="notes-text">${escapeHTML(body.split("\n").slice(1).join("\n")).replace(/\n/g, "<br>")}</div>
+</div>
 
       <div class="notes-bottom">
         <div class="notes-tools">
