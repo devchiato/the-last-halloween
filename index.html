@@ -565,14 +565,23 @@ body {
 }
 
 
-/* APPLE NOTES — iOS STYLE */
+
+/* APPLE NOTES — iCLOUD DESIGN */
 
 .app-page:has(.notes-screen) {
-  background: #f2f2f7;
-  color: #1c1c1e;
+  position: absolute;
+  inset: 0;
   padding: 0;
+  overflow-x: hidden;
   overflow-y: auto;
-  overscroll-behavior: contain;
+  background: #f2f1f7;
+  color: #000;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.app-page:has(.notes-screen)::-webkit-scrollbar {
+  display: none;
 }
 
 .app-page:has(.notes-screen) .app-header {
@@ -582,125 +591,228 @@ body {
 .notes-screen {
   position: relative;
   min-height: 100%;
-  padding: 60px 22px 100px;
+  padding: 12px 20px 100px;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #000;
   -webkit-font-smoothing: antialiased;
 }
 
-.notes-topbar {
+/* STATUS BAR */
+
+.notes-status {
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 7px;
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.notes-status-right {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 28px;
+  gap: 6px;
+  font-size: 14px;
 }
 
-.notes-folder,
-.notes-more {
-  border: 0;
-  background: transparent;
-  color: #ff9f0a;
-  font: inherit;
+.notes-signal {
+  letter-spacing: -3px;
   font-size: 17px;
-  cursor: pointer;
-  padding: 0;
 }
 
-.notes-folder {
-  letter-spacing: -0.3px;
+.notes-battery {
+  width: 24px;
+  height: 12px;
+  border: 1.5px solid #000;
+  border-radius: 4px;
+  padding: 1px;
+  position: relative;
+}
+
+.notes-battery::before {
+  content: "";
+  display: block;
+  width: 74%;
+  height: 100%;
+  background: #000;
+  border-radius: 2px;
+}
+
+.notes-battery::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 3px;
+  width: 2px;
+  height: 4px;
+  background: #000;
+}
+
+/* TOP BUTTONS */
+
+.notes-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  height: 44px;
+}
+
+.notes-circle {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  background: rgba(255,255,255,.88);
+  color: #171719;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #00000005;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.notes-back {
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+  padding: 0 0 4px;
 }
 
 .notes-more {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 1px;
-  padding: 0 3px;
+  padding-bottom: 7px;
 }
+
+/* ICLOUD HEADING */
 
 .notes-title {
+  margin: 27px 0 2px;
   font-size: 34px;
-  line-height: 1.15;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-  margin: 27px 0 20px;
-  color: #1c1c1e;
+  line-height: 1.12;
+  letter-spacing: -1.2px;
+  font-weight: 750;
+  color: #000;
 }
 
-.notes-search {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 36px;
-  padding: 0 10px;
-  margin-bottom: 28px;
-  border-radius: 10px;
-  background: #e3e3e8;
-  color: #8e8e93;
-  font-size: 17px;
-}
-
-.notes-search span:first-child {
-  font-size: 21px;
-  line-height: 1;
-}
-
-.notes-section h4 {
-  margin: 0 0 8px;
-  color: #8e8e93;
-  font-size: 13px;
+.notes-count {
+  margin: 9px 0 25px;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #85858b;
   font-weight: 400;
 }
 
-.note-item {
-  padding: 13px 0 14px;
-  border-bottom: 0.5px solid #c6c6c8;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
+/* SECTION HEADINGS */
 
-.note-title {
-  margin-bottom: 3px;
-  color: #1c1c1e;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.note-meta,
-.note-preview {
-  margin-top: 3px;
-  color: #8e8e93;
-  font-size: 13px;
-  line-height: 1.35;
-}
-
-.note-preview {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+.notes-section h4 {
+  margin: 0 0 12px;
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 750;
+  letter-spacing: -.45px;
+  color: #050505;
 }
 
 .previous-notes {
-  margin-top: 27px;
+  margin-top: 30px;
 }
 
+/* WHITE NOTE GROUPS */
+
+.notes-card {
+  background: #fff;
+  border-radius: 27px;
+  padding: 5px 20px;
+  overflow: hidden;
+}
+
+.note-item {
+  position: relative;
+  padding: 13px 0 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.note-item + .note-item {
+  border-top: 0.7px solid #dedee3;
+}
+
+.note-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+  line-height: 1.3;
+  font-weight: 650;
+  color: #090909;
+  overflow-wrap: anywhere;
+}
+
+.note-details {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  min-width: 0;
+  color: #8a8a90;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.note-meta {
+  flex-shrink: 0;
+  margin: 0;
+  color: #8a8a90;
+  font-size: 13px;
+}
+
+.note-preview {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
+  color: #8a8a90;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.note-folder {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  color: #8a8a90;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.note-folder-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* NEW NOTE BUTTON */
+
 .notes-compose {
-  position: fixed;
-  bottom: 38px;
-  right: max(calc((100% - 430px) / 2 + 24px), 24px);
+  position: sticky;
+  float: right;
+  margin-top: -65px;
+  margin-right: 0;
+  bottom: 18px;
+  width: 46px;
+  height: 46px;
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  border: none;
+  border: 0;
   border-radius: 50%;
-  background: #f2f2f7;
+  background: #fff;
   color: #ff9f0a;
-  font-size: 31px;
-  font-weight: 400;
+  font-size: 29px;
   cursor: pointer;
-  z-index: 10;
-  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 2px 12px #00000008;
 }
 </style>
 </head>
@@ -1117,67 +1229,141 @@ function openApp(name) {
         <div class="preview">Bang Doyoung: bentarrrrr</div>
       </div>`;
  
+
 } else if (name === "Notes") {
   appContent.innerHTML = `
     <div class="notes-screen">
 
+      <div class="notes-status">
+        <span>20:46</span>
+        <div class="notes-status-right">
+          <span class="notes-signal">▮▮▮</span>
+          <span>5G</span>
+          <span class="notes-battery"></span>
+        </div>
+      </div>
+
       <div class="notes-topbar">
-        <button class="notes-folder">‹ Folders</button>
-        <button class="notes-more">•••</button>
+        <button class="notes-circle notes-back"
+          onclick="goHome()" aria-label="Back to Home">‹</button>
+
+        <button class="notes-circle notes-more"
+          aria-label="More options">•••</button>
       </div>
 
-      <h1 class="notes-title">Notes</h1>
+      <h1 class="notes-title">All iCloud</h1>
+      <div class="notes-count">5 Notes</div>
 
-      <div class="notes-search">
-        <span>⌕</span>
-        <span>Search</span>
-      </div>
-
-      <div class="notes-section">
+      <section class="notes-section">
         <h4>Today</h4>
 
-        <div class="note-item" onclick="openNote('today')">
-          <div class="note-title">Halloween 🎃</div>
-          <div class="note-meta">7:00 PM</div>
-          <div class="note-preview">
-            31 October · Ke rumah Johnny...
+        <div class="notes-card">
+          <div class="note-item"
+            onclick="openNote('today')">
+
+            <div class="note-title">Halloween 🎃</div>
+
+            <div class="note-details">
+              <span class="note-meta">7:00 PM</span>
+              <span class="note-preview">
+                31 October · Ke rumah Johnny...
+              </span>
+            </div>
+
+            <div class="note-folder">
+              <span class="note-folder-icon">▱</span>
+              <span>Notes</span>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="notes-section previous-notes">
-        <h4>Previous 30 Days</h4>
+      <section class="notes-section previous-notes">
+        <h4>Previous 7 Days</h4>
 
-        <div class="note-item" onclick="openNote('note1')">
-          <div class="note-title">Untitled</div>
-          <div class="note-meta">Oct 29</div>
-          <div class="note-preview">...</div>
+        <div class="notes-card">
+
+          <div class="note-item"
+            onclick="openNote('note1')">
+
+            <div class="note-title">
+              Untitled
+            </div>
+
+            <div class="note-details">
+              <span class="note-meta">Oct 29</span>
+              <span class="note-preview">...</span>
+            </div>
+
+            <div class="note-folder">
+              <span class="note-folder-icon">▱</span>
+              <span>Notes</span>
+            </div>
+          </div>
+
+          <div class="note-item"
+            onclick="openNote('note2')">
+
+            <div class="note-title">
+              Untitled
+            </div>
+
+            <div class="note-details">
+              <span class="note-meta">Oct 27</span>
+              <span class="note-preview">...</span>
+            </div>
+
+            <div class="note-folder">
+              <span class="note-folder-icon">▱</span>
+              <span>Notes</span>
+            </div>
+          </div>
+
+          <div class="note-item"
+            onclick="openNote('note3')">
+
+            <div class="note-title">
+              Untitled
+            </div>
+
+            <div class="note-details">
+              <span class="note-meta">Oct 25</span>
+              <span class="note-preview">...</span>
+            </div>
+
+            <div class="note-folder">
+              <span class="note-folder-icon">▱</span>
+              <span>Notes</span>
+            </div>
+          </div>
+
+          <div class="note-item"
+            onclick="openNote('note4')">
+
+            <div class="note-title">
+              Untitled
+            </div>
+
+            <div class="note-details">
+              <span class="note-meta">Oct 23</span>
+              <span class="note-preview">...</span>
+            </div>
+
+            <div class="note-folder">
+              <span class="note-folder-icon">▱</span>
+              <span>Notes</span>
+            </div>
+          </div>
+
         </div>
-
-        <div class="note-item" onclick="openNote('note2')">
-          <div class="note-title">Untitled</div>
-          <div class="note-meta">Oct 27</div>
-          <div class="note-preview">...</div>
-        </div>
-
-        <div class="note-item" onclick="openNote('note3')">
-          <div class="note-title">Untitled</div>
-          <div class="note-meta">Oct 25</div>
-          <div class="note-preview">...</div>
-        </div>
-
-        <div class="note-item" onclick="openNote('note4')">
-          <div class="note-title">Untitled</div>
-          <div class="note-meta">Oct 23</div>
-          <div class="note-preview">...</div>
-        </div>
-      </div>
+      </section>
 
       <button class="notes-compose"
-        onclick="openNote('new')">✎</button>
+        onclick="openNote('new')"
+        aria-label="Create note">✎</button>
 
     </div>
-      `;
+  `;
   } else if (name === "Reminders") {
     appContent.innerHTML =
       "<p>◯ Jemput Haechan</p><p>◯ Halloween party</p>";
