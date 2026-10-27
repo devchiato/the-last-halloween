@@ -2536,21 +2536,7 @@ function openNote(id) {
   `;
 
   appPage.scrollTop = 0;
-}
 
-function openChat(which) {
-  document.getElementById("appTitle").textContent =
-    which === "mark" ? "Mark Lee" : "TONGKRONGAN ASIK";
-
-  appContent.innerHTML = which === "mark" ? `
-    <div class="bubble">bentar ya abis ini otw jemput</div>
-    <div class="bubble mine">oke, hati-hati</div>
-    <p style="text-align:center;font-size:12px;opacity:.6">
-      Mark Lee is not online
-    </p>` : `
-    <div class="bubble">Bang Johnny: pada kesini jam berapa?</div>
-    <div class="bubble">Bang Doyoung: bentarrrrr</div>
-    <div class="bubble mine">otw bentar lagi</div>`;
 }
 
 document.querySelectorAll("[data-app]").forEach(button => {
