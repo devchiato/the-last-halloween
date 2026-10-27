@@ -1080,6 +1080,257 @@ body {
   white-space: pre-wrap;
 }
 }
+/* APPLE REMINDERS */
+
+.app-page:has(.reminders-screen) {
+  padding: 0;
+  background: #f2f1f7;
+  color: #000;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.app-page:has(.reminders-screen)::-webkit-scrollbar {
+  display: none;
+}
+
+.app-page:has(.reminders-screen) .app-header {
+  display: none;
+}
+
+.reminders-screen {
+  position: relative;
+  min-height: 100%;
+  padding: 35px 20px 110px;
+  background: #f2f1f7;
+  color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* STATUS BAR */
+
+.phone:has(.reminders-screen) > .status {
+  display: none;
+}
+
+.reminders-screen > .reminders-status {
+  position: absolute;
+  top: 13px;
+  left: 28px;
+  right: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+  font-size: 15px;
+  font-weight: 600;
+  z-index: 19;
+}
+
+.reminders-status .status-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.reminders-status .battery {
+  border-color: #000;
+}
+
+.reminders-status .battery-level,
+.reminders-status .battery-cap {
+  background: #000;
+}
+
+/* TOP BAR */
+
+.reminders-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  height: 44px;
+}
+
+.reminders-circle {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: rgba(255,255,255,.9);
+  color: #ff9500;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #00000008;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reminders-back {
+  color: #ff9500;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+  padding: 0 0 4px;
+}
+
+.reminders-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.reminders-share {
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.reminders-more {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding-bottom: 7px;
+}
+
+/* TITLE */
+
+.reminders-title {
+  margin: 27px 0 5px;
+  font-size: 34px;
+  line-height: 1.12;
+  letter-spacing: -1.2px;
+  font-weight: 750;
+  color: #ff9500;
+}
+
+.reminders-subtitle {
+  margin: 9px 0 25px;
+  color: #85858b;
+  font-size: 16px;
+}
+
+/* REMINDER LIST */
+
+.reminders-card {
+  background: #fff;
+  border-radius: 23px;
+  padding: 4px 17px;
+  overflow: hidden;
+}
+
+.reminder-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 15px 0;
+}
+
+.reminder-item + .reminder-item {
+  border-top: 1px solid #e5e5ea;
+}
+
+.reminder-check {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  padding: 0;
+  border: 2px solid #ff9500;
+  border-radius: 50%;
+  background: transparent;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.reminder-check.done {
+  background: #ff9500;
+  border-color: #ff9500;
+}
+
+.reminder-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.reminder-name {
+  margin: 0;
+  color: #161616;
+  font-size: 16px;
+  line-height: 1.35;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.reminder-date {
+  margin-top: 5px;
+  color: #8a8a90;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.reminder-item.is-done .reminder-name {
+  color: #999;
+  text-decoration: line-through;
+}
+
+.reminder-item.is-done .reminder-date {
+  opacity: .65;
+}
+
+.reminders-empty {
+  padding: 20px 0;
+  color: #8a8a90;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ORANGE ADD BUTTON */
+
+.reminders-add {
+  position: fixed;
+  right: max(28px, calc((100vw - 430px) / 2 + 28px));
+  bottom: calc(25px + env(safe-area-inset-bottom));
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 50%;
+  background: #ff9500;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 35px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 25;
+  box-shadow: 0 3px 12px #00000018;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reminders-add:active {
+  transform: scale(.94);
+}
+
+@media (max-width: 400px) {
+  .reminders-screen {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .reminders-title {
+    font-size: 32px;
+  }
+
+  .reminders-add {
+    right: 23px;
+  }
+}
 </style>
 </head>
 
@@ -1642,9 +1893,60 @@ function openApp(name) {
 
     </div>
   `;
+
 } else if (name === "Reminders") {
-    appContent.innerHTML =
-      "<p>◯ Jemput Haechan</p><p>◯ Halloween party</p>";
+  appContent.innerHTML = `
+    <div class="reminders-screen">
+
+      <div class="reminders-status">
+        <span class="status-time">19:00</span>
+
+        <div class="status-icons">
+          <svg class="signal-icon" viewBox="0 0 18 14"
+            aria-label="Sinyal">
+            <path d="M1 13V10H4V13Z" fill="currentColor"/>
+            <path d="M5 13V7H8V13Z" fill="currentColor"/>
+            <path d="M9 13V4H12V13Z" fill="currentColor"/>
+            <path d="M13 13V1H16V13Z" fill="currentColor"/>
+          </svg>
+
+          <span class="network">5G</span>
+
+          <div class="battery">
+            <span class="battery-level"></span>
+            <span class="battery-cap"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reminders-topbar">
+        <button class="reminders-circle reminders-back"
+          onclick="goHome()" aria-label="Back to Home">‹</button>
+
+        <div class="reminders-top-actions">
+          <button class="reminders-circle reminders-share"
+            onclick="shareReminders()" aria-label="Share">↑</button>
+
+          <button class="reminders-circle reminders-more"
+            onclick="showReminderOptions()"
+            aria-label="More options">•••</button>
+        </div>
+      </div>
+
+      <h1 class="reminders-title">Reminders</h1>
+      <div class="reminders-subtitle">My Lists</div>
+
+      <div class="reminders-card" id="reminderList"></div>
+
+      <button class="reminders-add"
+        onclick="addReminder()"
+        aria-label="Add reminder">+</button>
+
+    </div>
+  `;
+
+  renderReminders();
+
   } else if (name === "Gmail") {
     appContent.innerHTML =
       "<h3>Security alert</h3><p>A sign-in was detected on October 30.</p>";
@@ -1669,6 +1971,121 @@ function openApp(name) {
     appContent.innerHTML =
       "<h3>Search</h3><p>mark lee accident october 30</p>";
   }
+}
+const reminders = [
+  {
+    id: 1,
+    title: "Jemput Haechan",
+    date: "October 31, 2026 · 8:30 PM",
+    done: false
+  },
+  {
+    id: 2,
+    title: "Halloween party 🎃",
+    date: "October 31, 2026 · 9:00 PM",
+    done: false
+  }
+];
+
+let nextReminderId = 3;
+
+function escapeReminderText(text) {
+  return String(text).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function renderReminders() {
+  const list = document.getElementById("reminderList");
+  if (!list) return;
+
+  if (reminders.length === 0) {
+    list.innerHTML =
+      '<div class="reminders-empty">No reminders</div>';
+    return;
+  }
+
+  list.innerHTML = reminders.map(item => `
+    <div class="reminder-item ${item.done ? "is-done" : ""}">
+      <button
+        class="reminder-check ${item.done ? "done" : ""}"
+        onclick="toggleReminder(${item.id})"
+        aria-label="${item.done ? "Mark incomplete" : "Complete reminder"}"
+      >${item.done ? "✓" : ""}</button>
+
+      <div class="reminder-content">
+        <p class="reminder-name">${escapeReminderText(item.title)}</p>
+        ${item.date ? `
+          <div class="reminder-date">
+            ${escapeReminderText(item.date)}
+          </div>
+        ` : ""}
+      </div>
+    </div>
+  `).join("");
+}
+
+function addReminder() {
+  const title = prompt("Reminder apa yang mau ditambahkan?");
+  if (title === null || !title.trim()) return;
+
+  const date = prompt(
+    "Tanggal atau waktu reminder (opsional):",
+    "October 31, 2026"
+  );
+
+  reminders.push({
+    id: nextReminderId++,
+    title: title.trim(),
+    date: date ? date.trim() : "",
+    done: false
+  });
+
+  renderReminders();
+}
+
+function toggleReminder(id) {
+  const item = reminders.find(reminder => reminder.id === id);
+  if (!item) return;
+
+  item.done = !item.done;
+  renderReminders();
+}
+
+function shareReminders() {
+  const text = reminders.map(item =>
+    `${item.done ? "✓" : "○"} ${item.title}` +
+    (item.date ? ` — ${item.date}` : "")
+  ).join("\n");
+
+  if (navigator.share) {
+    navigator.share({
+      title: "Reminders",
+      text: text || "No reminders"
+    }).catch(() => {});
+  } else {
+    alert(text || "No reminders");
+  }
+}
+
+function showReminderOptions() {
+  const choice = prompt(
+    "Reminders options:\n1. Hapus semua reminder yang selesai\n2. Batalkan"
+  );
+
+  if (choice !== "1") return;
+
+  for (let i = reminders.length - 1; i >= 0; i--) {
+    if (reminders[i].done) {
+      reminders.splice(i, 1);
+    }
+  }
+
+  renderReminders();
 }
 
 const noteData = {
