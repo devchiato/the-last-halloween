@@ -169,6 +169,7 @@ body {
   margin-bottom: 5px;
 }
 
+
 .imessage-icon {
   width: 25px;
   height: 25px;
@@ -177,7 +178,27 @@ body {
   color: white;
   display: grid;
   place-items: center;
-  font-size: 14px;
+  position: relative;
+}
+
+.imessage-icon::before {
+  content: "";
+  width: 15px;
+  height: 11px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.imessage-icon::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: white;
+  left: 6px;
+  bottom: 6px;
+  clip-path: polygon(100% 0, 0 100%, 100% 75%);
 }
 
 .sender {
@@ -608,9 +629,8 @@ body {
   <!-- PASSCODE -->
   <section class="screen passcode hidden" id="pass">
     <div>
-      <div style="font-size:30px">🔒</div>
+      <div style="font-size:30px"</div>
       <div class="pass-title">Enter Passcode</div>
-      <div class="pass-sub">iPhone locked</div>
 
       <div class="dots">
         <span class="dot"></span>
