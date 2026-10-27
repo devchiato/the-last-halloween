@@ -2003,6 +2003,9 @@ const home = document.getElementById("home");
 const appPage = document.getElementById("appPage");
 let code = "";
   
+
+let notificationAudioContext;
+
 function playIMessageSound() {
   try {
     const AudioContextClass =
@@ -2010,45 +2013,37 @@ function playIMessageSound() {
 
     if (!AudioContextClass) return;
 
-    const audioContext = new AudioContextClass();
+    if (!notificationAudioContext) {
+      notificationAudioContext = new AudioContextClass();
+    }
 
-    audioContext.resume().then(() => {
-      const notes = [
-        { frequency: 880, start: 0 },
-        { frequency: 1175, start: 0.13 }
-      ];
+    if (notificationAudioContext.state === "suspended") {
+      notificationAudioContext.resume();
+    }
 
-      notes.forEach(note => {
-        const oscillator = audioContext.createOscillator();
-        const gain = audioContext.createGain();
+    const ctx = notificationAudioContext;
+    const now = ctx.currentTime;
 
-        oscillator.type = "sine";
-        oscillator.frequency.value = note.frequency;
+    [880, 1175].forEach((frequency, index) => {
+      const oscillator = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const start = now + index * 0.14;
 
-        gain.gain.setValueAtTime(
-          0.0001,
-          audioContext.currentTime + note.start
-        );
-        gain.gain.exponentialRampToValueAtTime(
-          0.18,
-          audioContext.currentTime + note.start + 0.015
-        );
-        gain.gain.exponentialRampToValueAtTime(
-          0.0001,
-          audioContext.currentTime + note.start + 0.22
-        );
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(frequency, start);
 
-        oscillator.connect(gain);
-        gain.connect(audioContext.destination);
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.2, start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.25);
 
-        oscillator.start(audioContext.currentTime + note.start);
-        oscillator.stop(audioContext.currentTime + note.start + 0.23);
-      });
+      oscillator.connect(gain);
+      gain.connect(ctx.destination);
 
-      setTimeout(() => audioContext.close(), 1000);
-    }).catch(() => {});
+      oscillator.start(start);
+      oscillator.stop(start + 0.26);
+    });
   } catch (error) {
-    // Audio tidak tersedia di browser ini.
+    console.log("Audio error:", error);
   }
 }
 
