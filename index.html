@@ -1426,13 +1426,18 @@ document.querySelectorAll("[data-app]").forEach(button => {
   button.addEventListener("click", () => openApp(button.dataset.app));
 });
 
+
 document.getElementById("back").addEventListener("click", () => {
   appPage.classList.add("hidden");
   home.classList.remove("hidden");
+  appContent.innerHTML = "";
 });
+
+
 function goHome() {
   appPage.classList.add("hidden");
   home.classList.remove("hidden");
+  appContent.innerHTML = "";
 }
 </script>
 </body>
