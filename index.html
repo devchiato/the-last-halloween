@@ -813,27 +813,68 @@ body {
   pointer-events: none;
 }
 
+
 /* iOS Notes detail */
+
+.app-page:has(.notes-detail) {
+  padding: 0;
+  background: #fff;
+  color: #111;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.app-page:has(.notes-detail)::-webkit-scrollbar {
+  display: none;
+}
+
+.app-page:has(.notes-detail) .app-header {
+  display: none;
+}
+
+.app-page:has(.notes-detail) #appContent {
+  min-height: 100%;
+  background: #fff;
+}
 
 .notes-detail {
   position: relative;
   box-sizing: border-box;
   width: 100%;
   min-height: 100%;
-  padding: 88px 22px 100px;
+  padding: 112px 22px 110px;
   background: #fff;
   color: #383838;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* Tombol back, share, dan titik tiga */
 .notes-detail .notes-actions {
   position: absolute;
-  top: 13px;
-  left: 22px;
-  right: 22px;
+  top: 58px;
+  left: 18px;
+  right: 18px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
+  z-index: 21;
+}
+
+.notes-detail .notes-back-detail {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f5f5f7;
+  color: #007aff;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 0 0 4px;
+  cursor: pointer;
 }
 
 .notes-detail .notes-pill {
@@ -843,27 +884,17 @@ body {
   padding: 8px 15px;
   border-radius: 24px;
   background: #f5f5f7;
-  border: 0;
   color: #222;
   font-size: 22px;
 }
 
-.notes-detail .notes-tool {
-  border: 0;
-  padding: 0;
-  background: transparent;
-  color: #222;
-  font-size: 22px;
-  cursor: pointer;
-}
-
+/* Tanggal dan isi catatan */
 .notes-detail .notes-date {
   margin: 0 0 22px;
   color: #88888e;
   font-size: 13px;
   line-height: 1.4;
   font-weight: 500;
-  letter-spacing: 0;
 }
 
 .notes-detail .notes-body {
@@ -874,14 +905,33 @@ body {
   white-space: pre-wrap;
 }
 
+/* Ikon di dalam tombol */
+.notes-detail .notes-tool {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #222;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.notes-detail button:active {
+  opacity: .6;
+}
+
+/* Toolbar menempel di bawah layar HP */
 .notes-detail .notes-bottom {
   position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 18px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: #fff;
+  z-index: 22;
 }
 
 .notes-detail .notes-tools {
@@ -901,12 +951,73 @@ body {
   background: #f5f5f7;
   color: #222;
   font-size: 23px;
+  cursor: pointer;
 }
 
-.notes-detail button:active {
-  opacity: .6;
+/* Status bar hitam khusus halaman detail Notes */
+.phone:has(.notes-detail) > .status {
+  display: none;
 }
 
+.phone:has(.notes-detail) .notes-detail::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 38px;
+  background: #fff;
+  z-index: 19;
+  pointer-events: none;
+}
+.notes-detail .notes-status {
+  position: absolute;
+  top: 13px;
+  left: 28px;
+  right: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+  font-size: 15px;
+  font-weight: 600;
+  z-index: 20;
+}
+
+.notes-detail .notes-status-right {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.notes-detail .notes-battery {
+  display: inline-block;
+  width: 23px;
+  height: 12px;
+  border: 1.5px solid #000;
+  border-radius: 3px;
+  position: relative;
+}
+
+.notes-detail .notes-battery::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 70%;
+  height: 6px;
+  background: #000;
+  border-radius: 1px;
+}
+
+.notes-detail .notes-battery::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 3px;
+  width: 2px;
+  height: 4px;
+  background: #000;
 @media (max-width: 400px) {
   .notes-detail {
     padding-left: 20px;
@@ -921,35 +1032,6 @@ body {
   .notes-detail .notes-tool {
     font-size: 20px;
   }
-  .notes-detail {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .notes-detail .notes-tools {
-    gap: 17px;
-    padding: 13px 16px;
-  }
-
-  .notes-detail .notes-tool {
-    font-size: 26px;
-  }
-}
-  
-/* Hilangkan header aplikasi saat membuka detail Notes */
-.app-page:has(.notes-detail) {
-  padding: 0;
-  background: #fff;
-  overflow-y: auto;
-  color: #111;
-}
-
-.app-page:has(.notes-detail) .app-header {
-  display: none;
-}
-
-.app-page:has(.notes-detail) .notes-detail {
-  background: #fff;
 }
 </style>
 </head>
@@ -1628,9 +1710,20 @@ function openNote(id) {
 
   appContent.innerHTML = `
     <div class="notes-detail">
-      <div class="notes-actions">
+    <div class="notes-status">
+  <span>19:00</span>
+  <div class="notes-status-right">
+    <span>▮▮▮</span>
+    <span>5G</span>
+    <span class="notes-battery"></span>
+  </div>
+</div>
+     <div class="notes-actions">
+  <button class="notes-circle notes-back-detail"
+    onclick="openApp('Notes'); appPage.scrollTop = 0"
+    aria-label="Back to Notes">‹</button>
 
-        <div class="notes-pill">
+  <div class="notes-pill">
           <button class="notes-tool" aria-label="Share"
             onclick="alert('Share')">⇧</button>
           <button class="notes-tool" aria-label="More options"
