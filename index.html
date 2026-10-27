@@ -797,6 +797,25 @@ body {
 .notes-screen > .status .battery-cap {
   background: #000;
 }
+  
+/* FIX STATUS BAR HOME SCREEN */
+.phone > .status {
+  display: flex;
+  color: white;
+  z-index: 10;
+}
+
+/* Status bar utama disembunyikan hanya saat Notes terbuka */
+.phone:has(.notes-screen) > .status {
+  display: none;
+}
+
+/* Status bar di Notes tetap hitam */
+.notes-screen > .status {
+  display: flex;
+  color: black;
+  z-index: 20;
+}
 </style>
 </head>
 
